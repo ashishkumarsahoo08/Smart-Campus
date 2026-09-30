@@ -1,0 +1,3037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Campus | Unified Institutional Portal</title>
+  <meta name="description" content="Official Smart Campus Portal connecting Students, Faculty, Administrators, and Parents. Access attendance, timetables, gate passes, certificates, library, and 24/7 campus helpdesk.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="container announcement-content">
+      <span class="badge-pill">🎓 Academic Year 2026–27</span>
+      <span><strong>Smart Campus Unified Portal</strong> — Connecting Students, Faculty, Administrators, and Parents.</span>
+      <span class="badge-pill badge-secure">🔒 Verified Campus Portal</span>
+      <div class="lang-selector-mini">
+        <label for="localeSelect" class="sr-only">Language</label>
+        <span class="lang-icon">🌐</span>
+        <select id="localeSelect" aria-label="Select Regional Language">
+          <option value="en">English</option>
+          <option value="or">ଓଡ଼ିଆ (Odia)</option>
+          <option value="hi">हिन्दी (Hindi)</option>
+          <option value="ta">தமிழ் (Tamil)</option>
+          <option value="te">తెలుగు (Telugu)</option>
+          <option value="kn">ಕನ್ನಡ (Kannada)</option>
+          <option value="bn">বাংলা (Bengali)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Header / Navigation -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-wrapper">
+      <a href="#hero" class="brand-logo" aria-label="Smart Campus Home">
+        <div class="logo-icon-wrapper">
+          <svg class="mortarboard-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Smart Campus</span>
+          <span class="brand-subtitle">Unified Institutional Portal</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="#portals" class="nav-link highlighted">Campus Portals</a>
+        <a href="#services" class="nav-link">Campus Services</a>
+        <a href="#assistant-section" class="nav-link">AI Helpdesk</a>
+        <a href="#notices-preview" class="nav-link">Notices & Events</a>
+        <a href="#emergency-contact" class="nav-link">Support & Helpline</a>
+      </nav>
+
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="icon-btn" aria-label="Toggle theme" title="Toggle Theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button id="btnLowDataMode" class="btn btn-outline btn-sm" title="Toggle Low-Bandwidth Mode for slow connections & basic devices">
+          <span>⚡ Low-Data</span>
+        </button>
+        <button id="btnMobilePreviewModal" class="btn btn-outline btn-sm" title="Preview on Android Device">
+          <span>📱 Mobile QR</span>
+        </button>
+        
+        <!-- Activity History Button -->
+        <button id="btnOpenHistoryModal" class="btn btn-outline btn-sm" title="Campus Activity History & Audit Log">
+          <span>🕒 History</span>
+          <span class="history-badge-count" id="headerHistoryCount">0</span>
+        </button>
+
+        <!-- Current User Profile & Switcher (Shown when logged in) -->
+        <div class="user-header-widget" id="userHeaderWidget" style="display: none;">
+          <button class="user-pill-btn" id="btnUserMenuToggle" aria-label="User Account Menu">
+            <span class="user-pill-avatar" id="headerUserAvatar">👨‍🎓</span>
+            <div class="user-pill-info">
+              <strong id="headerUserName">Satyajit</strong>
+              <small id="headerUserRole">Student</small>
+            </div>
+            <span class="user-pill-chevron">▾</span>
+          </button>
+          <div class="user-dropdown-menu" id="userDropdownMenu" style="display: none;">
+            <div class="dropdown-header">
+              <strong id="dropdownFullName">Satyajit Mohapatra</strong>
+              <small id="dropdownSubInfo">Roll: CS-2024-082 • Sem 5</small>
+            </div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" id="dropdownSwitchUserBtn">
+              <span>🔄</span> Switch Account / Role
+            </button>
+            <button class="dropdown-item" id="dropdownViewHistoryBtn">
+              <span>🕒</span> My Activity History
+            </button>
+            <button class="dropdown-item" id="dropdownChangePasswordBtn">
+              <span>🔑</span> Change Password
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item text-danger" id="dropdownLogoutBtn">
+              <span>🚪</span> Sign Out
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-sm" id="btnHeaderLoginPrompt">
+          <span>🔑 Campus Login</span>
+        </button>
+
+        <button id="mobileNavToggle" class="mobile-toggle-btn" aria-label="Open navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Low Data Mode Alert Banner -->
+  <div id="lowDataBanner" class="low-data-banner" style="display: none;">
+    <span>⚡ <strong>Low-Bandwidth Mode Active:</strong> Optimized for low-end mobile devices and slow connections. Reduced data consumption & animations.</span>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>One Connected Campus • Students • Faculty • Admins • Parents</span>
+        </div>
+        <h1 class="hero-title">
+          Empowering Education Through a <span class="gradient-text">Unified Digital Campus</span>
+        </h1>
+        <p class="hero-description">
+          Welcome to the official <strong>Smart Campus Digital Portal</strong>. Access real-time attendance, daily timetables, paperless gate passes, verified digital certificates, central library resources, and 24/7 AI-guided student assistance in one integrated platform.
+        </p>
+
+        <!-- Replacing Disconnected Systems Ribbon -->
+        <div class="problem-overview-strip">
+          <div class="overview-left">
+            <span class="overview-icon">🔄</span>
+            <div class="overview-text">
+              <strong>Replacing Disconnected Campus Systems</strong>
+              <small>Unified digital ecosystem for everyday operations, leaves, complaints & administrative visibility</small>
+            </div>
+          </div>
+          <div class="overview-chips">
+            <span class="ov-chip strike">Paper Registers</span>
+            <span class="ov-chip strike">Notice Boards</span>
+            <span class="ov-chip strike">WhatsApp Groups</span>
+            <span class="ov-chip strike">Printed Forms</span>
+            <span class="ov-chip unified">✓ Single Unified Portal</span>
+          </div>
+        </div>
+
+        <!-- 4 Pillars Ribbon -->
+        <div class="pillars-ribbon" id="pillars">
+          <div class="pillar-chip">
+            <span class="pillar-icon">💬</span>
+            <div class="pillar-info">
+              <strong>Connect</strong>
+              <small>Targeted circulars & notices</small>
+            </div>
+          </div>
+          <div class="pillar-chip">
+            <span class="pillar-icon">⚙️</span>
+            <div class="pillar-info">
+              <strong>Manage</strong>
+              <small>Online live attendance & timetables</small>
+            </div>
+          </div>
+          <div class="pillar-chip">
+            <span class="pillar-icon">🎫</span>
+            <div class="pillar-info">
+              <strong>Simplify</strong>
+              <small>Instant digital passes & certs</small>
+            </div>
+          </div>
+          <div class="pillar-chip">
+            <span class="pillar-icon">👥</span>
+            <div class="pillar-info">
+              <strong>Empower</strong>
+              <small>SLA tracking, mess & fee queries</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-cta-group">
+          <a href="#portals" class="btn btn-primary btn-lg" id="btnHeroPortals">
+            <span id="heroCtaText">Sign In to Campus Portal</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </a>
+          <a href="#assistant-section" class="btn btn-secondary btn-lg">
+            <span>24/7 AI Campus Helpdesk</span>
+            <span class="sparkle-badge">AI</span>
+          </a>
+        </div>
+
+        <div class="hero-stats-strip">
+          <div class="stat-item">
+            <span class="stat-number" id="heroStatStudents">1,240+</span>
+            <span class="stat-label">Enrolled Students</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">120</span>
+            <span class="stat-label">Faculty Members</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">7+</span>
+            <span class="stat-label">Regional Languages</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Digital Clearances</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-card">
+          <img src="assets/hero_campus.jpg" alt="Smart Campus university grounds with high-tech student facilities" class="hero-img" loading="eager">
+          <div class="floating-badge badge-top-left">
+            <span class="badge-icon">🎓</span>
+            <div>
+              <strong>Smart Campus Portal</strong>
+              <small>Central University Ecosystem</small>
+            </div>
+          </div>
+          <div class="floating-badge badge-bottom-right">
+            <span class="badge-icon">⚡</span>
+            <div>
+              <strong>Instant Digital Passes</strong>
+              <small>QR Scannable at Campus Gates</small>
+            </div>
+          </div>
+          <div class="floating-badge badge-middle-left">
+            <span class="badge-icon">🌐</span>
+            <div>
+              <strong>Regional Languages Supported</strong>
+              <small>English • Odia • Hindi • Tamil • Telugu</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIFIED CAMPUS PORTALS (LOGIN GATEWAY & ROLE DASHBOARDS) -->
+  <section class="section-padding" id="portals">
+    <div class="container">
+      <div class="section-header text-center" id="portalsSectionHeader">
+        <span class="section-tag pulse-badge" id="portalsBadgeText">Institutional Single Sign-On</span>
+        <h2 class="section-title" id="portalsTitleText">Campus Login Portal</h2>
+        <p class="section-subtitle" id="portalsSubtitleText">Please select your campus role or sign in with your credentials to access your personalized workspace and daily actions.</p>
+      </div>
+
+      <!-- 1. IN-PAGE CAMPUS LOGIN PORTAL (Displayed when not logged in) -->
+      <div id="campusLoginSection" class="campus-login-container">
+        <div class="login-portal-card">
+          <div class="login-portal-header">
+            <div class="login-portal-badge">
+              <span class="pulse-dot"></span>
+              <span>Unified Institutional Access Gateway</span>
+            </div>
+            <h3 class="login-portal-title">Smart Campus Institutional Login</h3>
+            <p class="login-portal-subtitle">Welcome to the university digital portal. Choose your role below or enter your institutional credentials to access your personalized dashboard.</p>
+          </div>
+
+          <!-- 4 Role Quick Selector Cards -->
+          <div class="role-selector-grid">
+            <div class="role-selector-card" data-role-card="student">
+              <div class="r-icon">👨‍🎓</div>
+              <div class="r-content">
+                <strong>Student Portal</strong>
+                <span>Gate pass, attendance, timetable, exam admit cards & bonafide certs</span>
+              </div>
+              <button class="r-btn-action" data-login-id="student1" type="button">
+                <span>Sign In as Student &rarr;</span>
+              </button>
+            </div>
+
+            <div class="role-selector-card" data-role-card="faculty">
+              <div class="r-icon">👩‍🏫</div>
+              <div class="r-content">
+                <strong>Faculty Portal</strong>
+                <span>Review student gate passes, mark lecture attendance & verify certs</span>
+              </div>
+              <button class="r-btn-action" data-login-id="faculty1" type="button">
+                <span>Sign In as Faculty &rarr;</span>
+              </button>
+            </div>
+
+            <div class="role-selector-card" data-role-card="admin">
+              <div class="r-icon">👨‍💼</div>
+              <div class="r-content">
+                <strong>Administrator Hub</strong>
+                <span>Live campus metrics, gate pass policy controls & complete audit logs</span>
+              </div>
+              <button class="r-btn-action" data-login-id="admin" type="button">
+                <span>Sign In as Admin &rarr;</span>
+              </button>
+            </div>
+
+            <div class="role-selector-card" data-role-card="parent">
+              <div class="r-icon">👪</div>
+              <div class="r-content">
+                <strong>Parent / Guardian</strong>
+                <span>Ward live attendance monitoring, real-time SMS departure alerts & leaves</span>
+              </div>
+              <button class="r-btn-action" data-login-id="parent1" type="button">
+                <span>Sign In as Parent &rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Mode Switcher: 1-Click Fast Profile Access vs Manual Form Login -->
+          <div class="login-mode-bar">
+            <div class="login-mode-tabs">
+              <button class="mode-tab-btn active" id="btnModeQuickLogin" type="button">
+                <span>⚡ 1-Click Fast Profile Access</span>
+              </button>
+              <button class="mode-tab-btn" id="btnModeFormLogin" type="button">
+                <span>🔑 User ID & Password Sign In</span>
+              </button>
+            </div>
+            <div class="login-mode-hint" id="loginModeHintText">
+              <span>Choose any profile below to immediately launch that user's view:</span>
+            </div>
+          </div>
+
+          <!-- 1. Quick Profile Selector Subpanel -->
+          <div id="quickLoginPortalPanel" class="portal-login-subpanel">
+            <!-- Students -->
+            <div class="portal-group-box">
+              <div class="portal-group-title">
+                <span>👨‍🎓 Enrolled Students</span>
+                <small>Select student to view attendance, timetables, or apply for digital gate passes</small>
+              </div>
+              <div class="portal-profiles-grid" id="quickStudentsGrid">
+                <!-- Dynamically populated and synced -->
+              </div>
+            </div>
+
+            <!-- Faculty -->
+            <div class="portal-group-box">
+              <div class="portal-group-title">
+                <span>👩‍🏫 Faculty Members</span>
+                <small>Select faculty to review student gate pass queue & record attendance</small>
+              </div>
+              <div class="portal-profiles-grid" id="quickFacultyGrid">
+                <!-- Dynamically populated and synced -->
+              </div>
+            </div>
+
+            <!-- Admin & Parents Dual Row -->
+            <div class="portal-dual-row">
+              <div class="portal-group-box">
+                <div class="portal-group-title">
+                  <span>👨‍💼 Institutional Administrator</span>
+                </div>
+                <div id="quickAdminBox">
+                  <!-- Dynamically populated and synced -->
+                </div>
+              </div>
+
+              <div class="portal-group-box">
+                <div class="portal-group-title">
+                  <span>👪 Parents / Guardians</span>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;" id="quickParentsBox">
+                  <!-- Dynamically populated and synced -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Manual Credentials Form Subpanel -->
+          <div id="formLoginPortalPanel" class="portal-login-subpanel" style="display: none;">
+            <form id="portalInlineLoginForm" class="portal-credentials-form">
+              <div class="form-row-dual">
+                <div class="form-group">
+                  <label for="portalRoleSelect">Account Type / Campus Role:</label>
+                  <select id="portalRoleSelect" class="form-control" required>
+                    <option value="student">Student Portal</option>
+                    <option value="faculty">Faculty Member</option>
+                    <option value="admin">Campus Administrator</option>
+                    <option value="parent">Parent / Guardian</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="portalUsernameInput">Enrollment No / Staff ID / Username:</label>
+                  <input type="text" id="portalUsernameInput" class="form-control" placeholder="e.g. CS-2024-082, FAC-042, ADM-001" required value="CS-2024-082">
+                </div>
+              </div>
+              <div class="form-row-dual">
+                <div class="form-group">
+                  <label for="portalPasswordInput">Password:</label>
+                  <input type="password" id="portalPasswordInput" class="form-control" placeholder="••••••••" required value="campus123">
+                </div>
+                <div class="form-group" style="display: flex; align-items: flex-end;">
+                  <button type="submit" class="btn btn-primary btn-block">
+                    <span>Sign In with Credentials &rarr;</span>
+                  </button>
+                </div>
+              </div>
+              <div class="login-credentials-hint">
+                <span>💡 <strong>Quick Demo Credentials:</strong> Student: <code>CS-2024-082</code> | Faculty: <code>FAC-042</code> | Admin: <code>ADM-001</code> | Password: <code>campus123</code></span>
+              </div>
+            </form>
+          </div>
+
+          <!-- Security Footer -->
+          <div class="portal-security-footer">
+            <div class="sec-left">
+              <span class="sec-icon">🔒</span>
+              <span><strong>256-bit Institutional Gateway:</strong> All student gate passes, faculty approvals, and logins are immutably logged with Day, Date, and Time.</span>
+            </div>
+            <div class="sec-right">
+              <button class="btn btn-xs btn-outline" id="btnLoginSectionViewHistory" type="button">
+                <span>🕒 View Activity History</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. AUTHENTICATED DASHBOARD WORKSPACE (Visible only after login) -->
+      <div id="portalDashboardShell" class="portal-dashboard-shell" style="display: none;">
+        <!-- Active User Status Bar -->
+        <div class="active-user-status-bar" id="activeUserStatusBar">
+          <div class="status-bar-left">
+            <span class="status-indicator-dot"></span>
+            <span class="status-avatar" id="statusBarAvatar">👨‍🎓</span>
+            <div class="status-text-wrap">
+              <div class="status-user-heading">
+                <span class="status-greeting">Active Session:</span>
+                <strong id="statusBarName">Satyajit Mohapatra</strong>
+                <span class="status-role-badge" id="statusBarRoleBadge">STUDENT</span>
+              </div>
+              <span class="status-sub-detail" id="statusBarSubDetail">Roll: CS-2024-082 • 5th Semester • CSE</span>
+            </div>
+          </div>
+          <div class="status-bar-right">
+            <button class="btn btn-xs btn-outline" id="btnStatusBarSwitchUser" type="button" title="Switch to another role or account">
+              <span>🔄 Switch Role</span>
+            </button>
+            <button class="btn btn-xs btn-outline" id="btnStatusBarViewHistory" type="button" title="View audit history with timestamps">
+              <span>🕒 Activity History</span>
+            </button>
+            <button class="btn btn-xs btn-outline" id="btnStatusBarChangePassword" type="button" title="Change your login password">
+              <span>🔑 Change Password</span>
+            </button>
+            <button class="btn btn-xs btn-danger-outline" id="btnStatusBarSignOut" type="button" title="Sign out of portal">
+              <span>🚪 Sign Out</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Portal Device Shell -->
+        <div class="prototype-mockup-wrapper">
+        <div class="prototype-device-bar">
+          <div class="window-controls">
+            <span class="dot close"></span>
+            <span class="dot minimize"></span>
+            <span class="dot maximize"></span>
+          </div>
+          <div class="browser-address-bar">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span id="demoUrlText">https://portal.smartcampus.edu/student/dashboard</span>
+          </div>
+          <div class="device-actions">
+            <span class="connection-status"><span class="status-dot"></span> Campus Portal Online</span>
+          </div>
+        </div>
+
+        <!-- 4 Role Tabs: Student, Faculty, Admin, Parent -->
+        <div class="prototype-tabs-header role-tabs-4">
+          <button class="role-tab active" data-tab="student" id="tabStudentBtn">
+            <span class="role-tab-icon">👨‍🎓</span>
+            <div class="tab-meta">
+              <strong>Student Portal</strong>
+              <small>Satyajit Mohapatra</small>
+            </div>
+          </button>
+          <button class="role-tab" data-tab="faculty" id="tabFacultyBtn">
+            <span class="role-tab-icon">👩‍🏫</span>
+            <div class="tab-meta">
+              <strong>Faculty Portal</strong>
+              <small>Prof. Sharma (CSE)</small>
+            </div>
+          </button>
+          <button class="role-tab" data-tab="admin" id="tabAdminBtn">
+            <span class="role-tab-icon">👨‍💼</span>
+            <div class="tab-meta">
+              <strong>Administrator Hub</strong>
+              <small>Campus Administration</small>
+            </div>
+          </button>
+          <button class="role-tab" data-tab="parent" id="tabParentBtn">
+            <span class="role-tab-icon">👪</span>
+            <div class="tab-meta">
+              <strong>Parent Portal</strong>
+              <small>Mr. N. Mohapatra</small>
+            </div>
+          </button>
+        </div>
+
+        <!-- Dashboard Content Panels -->
+        <div class="prototype-body">
+
+          <!-- 1. STUDENT VIEW -->
+          <div class="dashboard-panel active" id="studentPanel">
+            <div class="dashboard-greeting-banner student-banner">
+              <div class="greeting-left">
+                <div class="user-mini-avatar">👨‍🎓</div>
+                <div>
+                  <h3 class="user-greeting-title">Hello, Satyajit! 👋</h3>
+                  <p class="user-greeting-sub">B.Tech Computer Science & Engineering • Roll No: CS-2024-082 • 5th Semester</p>
+                </div>
+              </div>
+              <div class="greeting-right">
+                <span class="chip-status online">Campus Status: Inside Campus</span>
+                <span class="chip-lang">Language: Odia / English</span>
+              </div>
+            </div>
+
+            <!-- Student Action Grid: 8 Core Unified Operations -->
+            <div class="action-tiles-grid">
+              <button class="action-tile" id="openNoticesModalBtn">
+                <div class="tile-icon-box bg-blue">📢</div>
+                <div class="tile-details">
+                  <h4>Targeted Notices</h4>
+                  <span class="tile-badge badge-unread" id="tileNoticesBadge">3 Circulars</span>
+                </div>
+              </button>
+
+              <button class="action-tile highlight-tile" id="openAttendanceModalBtn">
+                <div class="tile-icon-box bg-green">📋</div>
+                <div class="tile-details">
+                  <h4>Attendance Hub</h4>
+                  <span class="tile-badge badge-success" id="studentTileAttendanceBadge">88% (Safe Zone)</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openTimetableModalBtn">
+                <div class="tile-icon-box bg-orange">🕒</div>
+                <div class="tile-details">
+                  <h4>Live Timetable</h4>
+                  <span class="tile-badge">Period 2 (10 AM)</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openGatePassModalBtn">
+                <div class="tile-icon-box bg-teal">🎫</div>
+                <div class="tile-details">
+                  <h4>Digital Gate Pass</h4>
+                  <span class="tile-badge badge-teal">Apply / QR Pass</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openCertificatesModalBtn">
+                <div class="tile-icon-box bg-emerald">📜</div>
+                <div class="tile-details">
+                  <h4>Certificates</h4>
+                  <span class="tile-badge">Bonafide / TC</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openComplaintsModalBtn">
+                <div class="tile-icon-box bg-red">💬</div>
+                <div class="tile-details">
+                  <h4>Hostel Complaints</h4>
+                  <span class="tile-badge" id="tileComplaintsBadge">24h SLA Track</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openMessModalBtn">
+                <div class="tile-icon-box bg-amber">🍽️</div>
+                <div class="tile-details">
+                  <h4>Mess Services</h4>
+                  <span class="tile-badge">Menu & Feedback</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openFeeModalBtn">
+                <div class="tile-icon-box bg-purple">💳</div>
+                <div class="tile-details">
+                  <h4>Fee & Receipts</h4>
+                  <span class="tile-badge">Receipt Download</span>
+                </div>
+              </button>
+
+              <button class="action-tile highlight-tile" id="openFeedbackModalBtn">
+                <div class="tile-icon-box bg-teal">⭐</div>
+                <div class="tile-details">
+                  <h4>Student Feedback</h4>
+                  <span class="tile-badge badge-unread">Faculty & Campus</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="openChangePasswordModalBtn">
+                <div class="tile-icon-box bg-purple">🔑</div>
+                <div class="tile-details">
+                  <h4>Account Security</h4>
+                  <span class="tile-badge">Change Password</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Student Attendance Performance Hub (Overall & Subject-wise) -->
+            <div class="dash-card attendance-hero-card mb-4" id="studentAttendanceSummaryCard">
+              <div class="dash-card-header">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <span class="tile-icon-box bg-green" style="width: 36px; height: 36px; font-size: 1.1rem;">📋</span>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem;">My Attendance & Academic Eligibility (Overall & Subject-wise)</h4>
+                    <small class="text-muted">Updated live by faculty roll calls • 75% minimum criteria for semester examination hall ticket</small>
+                  </div>
+                </div>
+                <button class="btn btn-xs btn-outline" id="btnStudentViewAllAttendance">🔍 Open Session History & Certificate</button>
+              </div>
+              
+              <div class="attendance-summary-grid">
+                <!-- Overall Cumulative KPI Block -->
+                <div class="attendance-kpi-block">
+                  <div class="circular-progress-wrap">
+                    <svg class="progress-ring" width="120" height="120">
+                      <circle class="progress-ring-bg" stroke="rgba(255,255,255,0.08)" stroke-width="10" fill="transparent" r="50" cx="60" cy="60"/>
+                      <circle class="progress-ring-fill" id="studentOverallGaugeRing" stroke="var(--brand-emerald)" stroke-width="10" stroke-dasharray="314.16" stroke-dashoffset="37.7" stroke-linecap="round" fill="transparent" r="50" cx="60" cy="60"/>
+                    </svg>
+                    <div class="gauge-inner-val">
+                      <strong id="studentOverallAttPct">88%</strong>
+                      <small>Cumulative</small>
+                    </div>
+                  </div>
+                  <div class="attendance-status-chip safe" id="studentAttStatusChip">
+                    <span class="dot"></span>
+                    <span id="studentAttStatusText">Safe Zone (Above 75% Requirement)</span>
+                  </div>
+                  <p class="classes-held-count">Classes Attended: <strong id="studentAttClassesCount">136 / 154</strong> conducted</p>
+                  <div class="safety-margin-alert" id="studentAttMarginBox">
+                    <span id="studentAttMarginText">💡 <strong>Safety Margin:</strong> You can safely miss up to <strong>2 classes</strong> without dropping below 75%.</span>
+                  </div>
+                </div>
+
+                <!-- Subject-wise Breakdown Table -->
+                <div class="subject-breakdown-block">
+                  <div class="subject-breakdown-header">
+                    <strong>Subject-wise Attendance Breakdown</strong>
+                    <small class="text-muted">Click any subject to inspect roll call log</small>
+                  </div>
+                  <div class="subject-rows-container" id="studentSubjectRowsList">
+                    <!-- Injected dynamically via app.js -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Sub-Panels: Gate Pass Status & Mess Services -->
+            <div class="dashboard-split-row">
+              <!-- Live Gate Pass Status Widget -->
+              <div class="dash-card" id="studentGatePassCard">
+                <div class="dash-card-header">
+                  <h4>🎫 Active Gate Pass Status</h4>
+                  <button class="btn btn-xs btn-primary" id="cardApplyPassBtn">+ Apply Pass</button>
+                </div>
+                <div class="pass-preview-box" id="studentActivePassDisplay">
+                  <div class="pass-status-header">
+                    <span class="pass-id-badge">PASS #GP-8834</span>
+                    <span class="status-pill status-approved" id="currentPassStatusBadge">Approved</span>
+                  </div>
+                  <div class="pass-content">
+                    <div class="pass-field">
+                      <label>Purpose:</label>
+                      <span id="currentPassReason">Medical Appointment / Hospital</span>
+                    </div>
+                    <div class="pass-field">
+                      <label>Valid Time:</label>
+                      <span id="currentPassTime">Today: 03:30 PM - 07:30 PM</span>
+                    </div>
+                    <div class="pass-field">
+                      <label>Approved By:</label>
+                      <span id="currentPassApprover">Prof. Sharma (HOD CSE)</span>
+                    </div>
+                  </div>
+                  <div class="pass-qr-sim">
+                    <div class="qr-box">
+                      <div class="qr-pattern"></div>
+                      <span class="qr-caption">Scan at Campus Gate #2</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline" id="viewFullPassModalBtn">View Digital Pass</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Today's Mess Menu & Rating Card -->
+              <div class="dash-card" id="studentMessCard">
+                <div class="dash-card-header">
+                  <h4>🍽️ Today's Campus Mess & Dining</h4>
+                  <button class="btn btn-xs btn-outline" id="btnStudentOpenMessModal">View Full Menu</button>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                  <div class="meal-slot-card">
+                    <div class="meal-slot-header">
+                      <strong>🍛 Lunch (12:30 PM - 02:30 PM)</strong>
+                      <span class="status-pill status-approved">Live Now</span>
+                    </div>
+                    <p class="meal-items-text" id="dashMessLunchPreview">Steamed Basmati Rice, Dal Tadka, Paneer Butter Masala / Chicken Curry, Mixed Veg, Fresh Salad, Curd.</p>
+                  </div>
+                  <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.65rem 0.85rem; display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                      <small class="text-muted d-block">Rate Today's Food Quality:</small>
+                      <div class="star-rating-row" id="dashMessRatingStars">
+                        <span data-star="1">⭐</span>
+                        <span data-star="2">⭐</span>
+                        <span data-star="3">⭐</span>
+                        <span data-star="4">⭐</span>
+                        <span data-star="5">⭐</span>
+                      </div>
+                    </div>
+                    <button class="btn btn-xs btn-outline" id="dashMessRebateBtn">Mess Leave Rebate</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. FACULTY VIEW -->
+          <div class="dashboard-panel" id="facultyPanel">
+            <div class="dashboard-greeting-banner faculty-banner">
+              <div class="greeting-left">
+                <div class="user-mini-avatar">👩‍🏫</div>
+                <div>
+                  <h3 class="user-greeting-title">Welcome, Prof. Sharma!</h3>
+                  <p class="user-greeting-sub">Associate Professor • Computer Science & Eng. • Staff ID: FAC-042</p>
+                </div>
+              </div>
+              <div class="greeting-right">
+                <span class="chip-status">Today's Lectures: 3 Scheduled</span>
+                <span class="chip-lang">Dept: CSE</span>
+              </div>
+            </div>
+
+            <!-- Take Attendance Online Section (Direct Digital Register) -->
+            <div class="dash-card mb-4" id="facultyLiveAttendanceRegisterCard">
+              <div class="dash-card-header">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <span class="tile-icon-box bg-green" style="width: 36px; height: 36px; font-size: 1.1rem;">📋</span>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Take Attendance Online (Direct Digital Register)</h4>
+                    <small class="text-muted">Take lecture roll call directly online • Instantly updates student subject-wise & overall attendance records</small>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <span class="status-pill status-approved">⚡ Live Institutional Sync</span>
+                </div>
+              </div>
+
+              <div class="faculty-attendance-controls">
+                <div class="form-row-3">
+                  <div class="form-group mb-0">
+                    <label for="facAttSubjectSelect">Subject / Course:</label>
+                    <select id="facAttSubjectSelect" class="form-control form-control-sm">
+                      <option value="CS501">CS501: AI & Machine Learning (Prof. Sharma)</option>
+                      <option value="CS503">CS503: Data Structures & Algorithms (Prof. Sharma)</option>
+                      <option value="CS502">CS502: Cloud Computing & DevOps (Dr. Patel)</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-0">
+                    <label for="facAttBatchSelect">Batch / Class:</label>
+                    <select id="facAttBatchSelect" class="form-control form-control-sm">
+                      <option value="CSE 5th Sem - Batch A">CSE 5th Semester - Batch A</option>
+                      <option value="CSE 5th Sem - Batch B">CSE 5th Semester - Batch B</option>
+                    </select>
+                  </div>
+                  <div class="form-group mb-0">
+                    <label for="facAttSlotSelect">Lecture Period & Time:</label>
+                    <select id="facAttSlotSelect" class="form-control form-control-sm">
+                      <option value="Period 1: 09:00 AM - 10:00 AM">Period 1 (09:00 AM - 10:00 AM)</option>
+                      <option value="Period 2: 10:00 AM - 11:00 AM" selected>Period 2 (10:00 AM - 11:00 AM)</option>
+                      <option value="Period 3: 11:15 AM - 12:15 PM">Period 3 (11:15 AM - 12:15 PM)</option>
+                      <option value="Period 4: 02:00 PM - 03:00 PM">Period 4 (02:00 PM - 03:00 PM)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row-2 mt-2">
+                  <div class="form-group mb-0">
+                    <label for="facAttTopicInput">Lecture Topic / Learning Objective:</label>
+                    <input type="text" id="facAttTopicInput" class="form-control form-control-sm" placeholder="e.g. Convolutional Neural Networks & Image Classification" value="Convolutional Neural Networks & Backpropagation">
+                  </div>
+                  <div class="quick-mark-actions">
+                    <button type="button" class="btn btn-xs btn-outline" id="btnMarkAllPresent">✅ Mark All Present</button>
+                    <button type="button" class="btn btn-xs btn-outline" id="btnMarkAllAbsent">❌ Mark All Absent</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Roll Call Student List -->
+              <div class="live-rollcall-table-wrap mt-3">
+                <div class="rollcall-stats-strip">
+                  <span id="rollcallTotalCount">Enrolled: <strong>3</strong></span>
+                  <span class="text-success" id="rollcallPresentCount">Present: <strong>2</strong></span>
+                  <span class="text-danger" id="rollcallAbsentCount">Absent: <strong>1</strong></span>
+                  <span id="rollcallRatioText">Current Session Rate: <strong>66.7%</strong></span>
+                </div>
+
+                <table class="data-table rollcall-table" id="facRollCallTable">
+                  <thead>
+                    <tr>
+                      <th>Roll No</th>
+                      <th>Student Name</th>
+                      <th>Current Subject %</th>
+                      <th>Current Overall %</th>
+                      <th>Attendance Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="facRollCallTableBody">
+                    <!-- Populated dynamically via JavaScript with one-click toggles [P] [A] [L] -->
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="card-footer-actions mt-3" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                <small class="text-muted">Submitting directly logs attendance, recalculates percentages, and flags shortage alerts.</small>
+                <button type="button" class="btn btn-primary" id="btnSubmitLiveAttendance">
+                  <span>💾 Submit & Save Attendance Register</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Faculty Action Grid -->
+            <div class="action-tiles-grid">
+              <button class="action-tile" id="facPostNoticeBtn">
+                <div class="tile-icon-box bg-blue">📢</div>
+                <div class="tile-details">
+                  <h4>Post Notice</h4>
+                  <span class="tile-badge">Publish Circular</span>
+                </div>
+              </button>
+
+              <button class="action-tile highlight-tile" id="facManageAttendanceBtn">
+                <div class="tile-icon-box bg-green">📋</div>
+                <div class="tile-details">
+                  <h4>Take Attendance</h4>
+                  <span class="tile-badge badge-unread">Direct Online</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="facRespondRequestsBtn">
+                <div class="tile-icon-box bg-orange">📥</div>
+                <div class="tile-details">
+                  <h4>Respond Requests</h4>
+                  <span class="tile-badge badge-teal" id="facPendingReqCount">3 Requests</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="facApproveTimetableBtn">
+                <div class="tile-icon-box bg-purple">🕒</div>
+                <div class="tile-details">
+                  <h4>Timetable Swap</h4>
+                  <span class="tile-badge">Broadcast Update</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="facApprovePassBtn">
+                <div class="tile-icon-box bg-teal">🎫</div>
+                <div class="tile-details">
+                  <h4>Approve Gate Pass</h4>
+                  <span class="tile-badge badge-unread">1 Pending</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="facIssueCertificatesBtn">
+                <div class="tile-icon-box bg-emerald">📜</div>
+                <div class="tile-details">
+                  <h4>Issue Certificates</h4>
+                  <span class="tile-badge">Bonafide / LOR</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="facViewFeedbackBtn">
+                <div class="tile-icon-box bg-amber">⭐</div>
+                <div class="tile-details">
+                  <h4>Student Reviews</h4>
+                  <span class="tile-badge badge-success" id="facFeedbackScoreBadge">4.8 / 5.0 ⭐</span>
+                </div>
+              </button>
+
+              <button class="action-tile" id="btnFacultyChangePassword">
+                <div class="tile-icon-box bg-purple">🔑</div>
+                <div class="tile-details">
+                  <h4>Account Security</h4>
+                  <span class="tile-badge">Change Password</span>
+                </div>
+              </button>
+            </div>
+
+            <!-- Faculty Pending Approvals List -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h4>📥 Pending Student Gate Passes & Academic Requests</h4>
+                <span class="badge-pill">Real-time Queue</span>
+              </div>
+              <div class="requests-table-container">
+                <table class="data-table" id="facultyRequestsTable">
+                  <thead>
+                    <tr>
+                      <th>Student</th>
+                      <th>Request Type</th>
+                      <th>Reason / Detail</th>
+                      <th>Time Requested</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="facultyRequestListBody">
+                    <tr id="reqRowSatyajit">
+                      <td>
+                        <strong>Satyajit Mohapatra</strong><br>
+                        <small>CS-2024-082 • Sem 5</small>
+                      </td>
+                      <td><span class="status-pill status-gate">Gate Pass</span></td>
+                      <td>Urgent Visit: Medical Checkup at Apollo Clinic</td>
+                      <td>Today, 03:30 PM - 07:30 PM</td>
+                      <td class="action-cell">
+                        <button class="btn btn-xs btn-success approve-btn" data-id="Satyajit">Approve</button>
+                        <button class="btn btn-xs btn-danger reject-btn" data-id="Satyajit">Reject</button>
+                      </td>
+                    </tr>
+                    <tr id="reqRowRahul">
+                      <td>
+                        <strong>Rahul Verma</strong><br>
+                        <small>CS-2024-015 • Sem 5</small>
+                      </td>
+                      <td><span class="status-pill status-lab">Lab Equipment</span></td>
+                      <td>NVIDIA Jetson Nano kit for AI project</td>
+                      <td>Duration: 7 Days</td>
+                      <td class="action-cell">
+                        <button class="btn btn-xs btn-success approve-btn" data-id="Rahul">Approve</button>
+                        <button class="btn btn-xs btn-danger reject-btn" data-id="Rahul">Reject</button>
+                      </td>
+                    </tr>
+                    <tr id="reqRowAnanya">
+                      <td>
+                        <strong>Ananya Das</strong><br>
+                        <small>CS-2024-044 • Sem 5</small>
+                      </td>
+                      <td><span class="status-pill status-cert">Bonafide Cert</span></td>
+                      <td>State Scholarship Application</td>
+                      <td>Submitted 2 hrs ago</td>
+                      <td class="action-cell">
+                        <button class="btn btn-xs btn-success approve-btn" data-id="Ananya">Sign & Issue</button>
+                        <button class="btn btn-xs btn-danger reject-btn" data-id="Ananya">Review</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Faculty Student Feedback Appraisal Summary -->
+            <div class="dash-card mt-4" id="facultyFeedbackCard">
+              <div class="dash-card-header">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <span class="tile-icon-box bg-amber" style="width: 36px; height: 36px; font-size: 1.1rem;">⭐</span>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Student Teaching Feedback & Course Appraisals</h4>
+                    <small class="text-muted">Aggregated course appraisals & student evaluations for Prof. Sharma (118 evaluations logged)</small>
+                  </div>
+                </div>
+                <span class="status-pill status-approved">⭐ 4.8 / 5.0 (Exemplary Standing)</span>
+              </div>
+
+              <div class="feedback-stats-grid">
+                <div class="feedback-score-kpi">
+                  <strong class="big-score">4.8</strong>
+                  <div class="star-rating-display">⭐⭐⭐⭐⭐</div>
+                  <small class="text-muted">Institutional Rank: Top 5%</small>
+                </div>
+
+                <div class="feedback-metric-bars">
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Clarity of Teaching & Concepts</span><strong>4.9 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 98%;"></div></div>
+                  </div>
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Doubt Resolution & Accessibility</span><strong>4.8 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 96%;"></div></div>
+                  </div>
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Fairness in Lab & Internal Assessments</span><strong>4.7 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 94%;"></div></div>
+                  </div>
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Punctuality & Syllabus Coverage</span><strong>4.9 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 98%;"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Student Appraisals Stream -->
+              <h5 class="mt-3 mb-2" style="font-size: 0.88rem; color: var(--text-main);">Recent Anonymous Student Remarks:</h5>
+              <div class="student-remarks-list" id="facStudentRemarksList">
+                <div class="remark-bubble">
+                  <div class="remark-header">
+                    <span class="badge-role-tag">CS501 AI & ML</span>
+                    <span class="star-val">⭐⭐⭐⭐⭐ 5.0</span>
+                    <small class="text-muted" style="margin-left: auto;">Today at 11:30 AM</small>
+                  </div>
+                  <p class="remark-body">"Prof. Sharma explains Convolutional Neural Networks with live code demonstrations in Python, which makes theoretical concepts extremely clear and practical."</p>
+                </div>
+                <div class="remark-bubble">
+                  <div class="remark-header">
+                    <span class="badge-role-tag">CS503 DSA</span>
+                    <span class="star-val">⭐⭐⭐⭐ 4.5</span>
+                    <small class="text-muted" style="margin-left: auto;">Yesterday at 04:15 PM</small>
+                  </div>
+                  <p class="remark-body">"Great interactive lectures on Graph Traversal algorithms. Would be wonderful to have an extra 30-minute tutorial session on dynamic programming before midterms."</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. ADMIN VIEW -->
+          <div class="dashboard-panel" id="adminPanel">
+            <div class="dashboard-greeting-banner admin-banner">
+              <div class="greeting-left">
+                <div class="user-mini-avatar">👨‍💼</div>
+                <div>
+                  <h3 class="user-greeting-title">Campus Administrator Hub</h3>
+                  <p class="user-greeting-sub">Central Operational Oversight • Real-time Complaint SLA • Attendance Shortage Alerts</p>
+                </div>
+              </div>
+              <div class="greeting-right">
+                <span class="chip-status online">System Operational</span>
+                <span class="chip-lang">Role: SuperAdmin</span>
+              </div>
+            </div>
+
+            <!-- Admin 4 Metric Cards -->
+            <div class="admin-kpi-grid">
+              <div class="kpi-card">
+                <div class="kpi-icon-box bg-blue">👥</div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Total Enrolled Students</span>
+                  <strong class="kpi-value" id="kpiStudents">1,240</strong>
+                  <span class="kpi-sub green-text">8 Academic Batches</span>
+                </div>
+              </div>
+
+              <div class="kpi-card">
+                <div class="kpi-icon-box bg-green">👩‍🏫</div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Active Faculty</span>
+                  <strong class="kpi-value" id="kpiFaculty">120</strong>
+                  <span class="kpi-sub">8 Departments</span>
+                </div>
+              </div>
+
+              <div class="kpi-card">
+                <div class="kpi-icon-box bg-red">⚠️</div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Open Grievance Tickets</span>
+                  <strong class="kpi-value" id="kpiComplaints">18</strong>
+                  <span class="kpi-sub orange-text">Avg SLA: 3.8 Hours</span>
+                </div>
+              </div>
+
+              <div class="kpi-card">
+                <div class="kpi-icon-box bg-purple">🎫</div>
+                <div class="kpi-data">
+                  <span class="kpi-label">Active Gate Passes</span>
+                  <strong class="kpi-value" id="kpiPasses">12</strong>
+                  <span class="kpi-sub blue-text">Synced with Security Gates</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recurring Issues Alert & Complaint SLA Strip -->
+            <div class="recurring-alert-box mb-4" id="adminRecurringIssuesBox">
+              <div class="recurring-alert-header">
+                <span class="pulse-dot red"></span>
+                <strong>⚠️ Real-Time Operational Alert: Recurring Campus Grievances Detected</strong>
+                <span class="status-pill status-urgent" style="margin-left: auto;">Auto-Escalated</span>
+              </div>
+              <div class="recurring-alert-content">
+                <p><strong>Hotspot Cluster:</strong> <strong>4 complaints</strong> logged in the last 48 hours for <em>"High-Speed Fiber Wi-Fi Access Point Dropped"</em> in <strong>Hostel Block B (3rd Floor)</strong>.</p>
+                <div class="sla-progress-wrap mt-2">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 0.25rem;">
+                    <span>Campus Complaints SLA Compliance: <strong>92.4% within 24 Hours</strong></span>
+                    <span>Average Resolution Time: <strong>3.8 Hours</strong></span>
+                  </div>
+                  <div style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;">
+                    <div style="width: 92%; height: 100%; background: var(--brand-emerald);"></div>
+                  </div>
+                </div>
+                <div class="mt-2" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <button class="btn btn-xs btn-primary" id="btnAdminEscalateVendor">Dispatch Campus Network Engineer</button>
+                  <button class="btn btn-xs btn-outline" id="btnAdminViewAllComplaints">Open Grievance Radar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Split Row: Attendance Shortage Oversight & Targeted Notifications -->
+            <div class="dashboard-split-row mb-4">
+              <!-- Attendance Shortage & Parent Warning Widget -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="tile-icon-box bg-red" style="width: 30px; height: 30px; font-size: 0.95rem;">🚨</span>
+                    <div>
+                      <h4 style="margin: 0; font-size: 0.95rem;">Attendance Shortage Roster (&lt; 75%)</h4>
+                      <small class="text-muted">Mandatory regulatory threshold compliance</small>
+                    </div>
+                  </div>
+                  <span class="status-pill status-urgent" id="adminShortageCountBadge">1 Defaulter</span>
+                </div>
+                <div class="shortage-table-wrap">
+                  <table class="data-table" style="font-size: 0.84rem;">
+                    <thead>
+                      <tr>
+                        <th>Student</th>
+                        <th>Overall %</th>
+                        <th>Lowest Subject</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="adminShortageTableBody">
+                      <tr>
+                        <td>
+                          <strong>Rahul Verma</strong><br>
+                          <small>CS-2024-015 • Sem 5</small>
+                        </td>
+                        <td><span class="status-pill status-danger">74%</span></td>
+                        <td>CS501 (68%)</td>
+                        <td>
+                          <button class="btn btn-xs btn-outline" id="btnSendShortageSmsRahul">📲 Send Parent Warning SMS</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <small class="text-muted d-block mt-2">Parents are automatically sent proactive SMS alerts when attendance falls below 75%.</small>
+                </div>
+              </div>
+
+              <!-- Targeted Institutional Notification Dispatcher -->
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span class="tile-icon-box bg-blue" style="width: 30px; height: 30px; font-size: 0.95rem;">📢</span>
+                    <div>
+                      <h4 style="margin: 0; font-size: 0.95rem;">Targeted Circular & SMS Dispatcher</h4>
+                      <small class="text-muted">Replaces noisy WhatsApp groups with targeted broadcasts</small>
+                    </div>
+                  </div>
+                  <span class="badge-pill">Targeted</span>
+                </div>
+                <form id="adminBroadcastForm" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                  <div class="form-row-2">
+                    <div class="form-group mb-0">
+                      <label for="broadcastAudience" style="font-size: 0.78rem;">Target Audience:</label>
+                      <select id="broadcastAudience" class="form-control form-control-sm">
+                        <option value="All Campus">All Campus (Everyone)</option>
+                        <option value="Students Only">Enrolled Students Only</option>
+                        <option value="Faculty Only">Faculty & Staff Only</option>
+                        <option value="Hostel Residents">Hostel Residents Only</option>
+                        <option value="Parents">Parents / Guardians</option>
+                      </select>
+                    </div>
+                    <div class="form-group mb-0">
+                      <label for="broadcastPriority" style="font-size: 0.78rem;">Delivery Channel:</label>
+                      <select id="broadcastPriority" class="form-control form-control-sm">
+                        <option value="Web + SMS Fallback">Web Portal + SMS Fallback (Low-Data)</option>
+                        <option value="Web Portal Only">Web Portal Circular Only</option>
+                        <option value="Urgent Siren SMS">Urgent Emergency SMS Broadcast</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group mb-0">
+                    <label for="broadcastTitle" style="font-size: 0.78rem;">Announcement Title:</label>
+                    <input type="text" id="broadcastTitle" class="form-control form-control-sm" placeholder="e.g. Campus Library Extended Hours During Midterms" value="Mid-Term Examination Hall Tickets Download Live">
+                  </div>
+                  <div class="form-group mb-0">
+                    <label for="broadcastBody" style="font-size: 0.78rem;">Notification Message:</label>
+                    <input type="text" id="broadcastBody" class="form-control form-control-sm" placeholder="Message content..." value="Hall tickets for 5th Sem CSE are now available. Verify that your attendance is >=75%.">
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-primary mt-1">🚀 Broadcast to Selected Audience</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- Campus Activity Log Chart -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h4>📊 Monthly Campus Operations & Transactions</h4>
+                  <small>Real-time operational activity across campus departments</small>
+                </div>
+                <div class="chart-legend">
+                  <span class="legend-dot dot-notices">Notices (840)</span>
+                  <span class="legend-dot dot-timetable">Time Table (1.2k)</span>
+                  <span class="legend-dot dot-gatepass">Gate Pass (3.4k)</span>
+                  <span class="legend-dot dot-certificates">Certificates (620)</span>
+                  <span class="legend-dot dot-complaints">Complaints (142)</span>
+                </div>
+              </div>
+
+              <div class="visual-chart-container">
+                <div class="chart-bars-group">
+                  <div class="chart-col">
+                    <div class="bar-fill bar-notices" style="height: 65%;" title="Notices: 840 events"></div>
+                    <span class="bar-label">Notices</span>
+                  </div>
+                  <div class="chart-col">
+                    <div class="bar-fill bar-timetable" style="height: 80%;" title="Timetables: 1,210 requests"></div>
+                    <span class="bar-label">Time Table</span>
+                  </div>
+                  <div class="chart-col">
+                    <div class="bar-fill bar-gatepass" style="height: 95%;" title="Gate Passes: 3,420 processed"></div>
+                    <span class="bar-label">Gate Pass</span>
+                  </div>
+                  <div class="chart-col">
+                    <div class="bar-fill bar-certificates" style="height: 50%;" title="Certificates: 620 issued"></div>
+                    <span class="bar-label">Certificates</span>
+                  </div>
+                  <div class="chart-col">
+                    <div class="bar-fill bar-complaints" style="height: 35%;" title="Complaints: 142 resolved"></div>
+                    <span class="bar-label">Complaints</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campus & Faculty Feedback Intelligence Radar -->
+            <div class="dash-card mb-4" id="adminFeedbackIntelligenceCard">
+              <div class="dash-card-header">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <span class="tile-icon-box bg-teal" style="width: 36px; height: 36px; font-size: 1.1rem;">⭐</span>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Institutional Student Feedback & Quality Radar</h4>
+                    <small class="text-muted">Real-time student feedback intelligence on faculty teaching and campus infrastructure (342 verified submissions)</small>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                  <span class="status-pill status-approved">Institutional Index: 4.7 / 5.0 ⭐</span>
+                </div>
+              </div>
+
+              <div class="feedback-stats-grid">
+                <!-- Teaching vs Campus Dual Score -->
+                <div class="feedback-dual-overview">
+                  <div class="dual-score-item">
+                    <span class="score-title">👩‍🏫 Faculty Teaching Score</span>
+                    <strong class="score-num green-text">4.8 <small>/ 5.0</small></strong>
+                    <small class="text-muted">Across 8 Academic Departments</small>
+                  </div>
+                  <div class="dual-score-item">
+                    <span class="score-title">🏛️ Campus Infrastructure Score</span>
+                    <strong class="score-num teal-text">4.6 <small>/ 5.0</small></strong>
+                    <small class="text-muted">Classrooms, Labs, Wi-Fi & Facilities</small>
+                  </div>
+                </div>
+
+                <!-- Facilities Rating Breakdown -->
+                <div class="feedback-metric-bars">
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Labs, Compute & Robotics Infrastructure</span><strong>4.8 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 96%; background: var(--brand-emerald);"></div></div>
+                  </div>
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Central Library & E-Resource Access</span><strong>4.9 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 98%; background: var(--brand-emerald);"></div></div>
+                  </div>
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Campus Cleanliness, Greenery & Hygiene</span><strong>4.7 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 94%; background: var(--brand-cyan);"></div></div>
+                  </div>
+                  <div class="feedback-bar-item">
+                    <div class="f-bar-lbl"><span>Campus Wi-Fi & IT Network (Hotspots Identified)</span><strong>4.1 / 5.0</strong></div>
+                    <div class="f-bar-track"><div class="f-bar-fill" style="width: 82%; background: var(--brand-amber);"></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Stream of Student Appraisals -->
+              <h5 class="mt-3 mb-2" style="font-size: 0.88rem; color: var(--text-main);">Recent Student Submissions (Faculty & Campus):</h5>
+              <div class="admin-feedback-feed" id="adminFeedbackFeedList">
+                <div class="admin-feed-item">
+                  <span class="badge-role-tag">FACULTY: CS501</span>
+                  <span class="sentiment-pill positive">⭐ 5/5 Highly Positive</span>
+                  <p class="feed-text">"Practical demos in AI lab helped in building the mini-project smoothly. Excellent doubt clearing."</p>
+                  <small class="text-muted">Anonymous Student • 5th Sem CSE • 2 hrs ago</small>
+                </div>
+                <div class="admin-feed-item">
+                  <span class="badge-role-tag">CAMPUS: WI-FI</span>
+                  <span class="sentiment-pill attention">⭐ 2/5 Needs Upgrade</span>
+                  <p class="feed-text">"Wi-Fi signal frequently drops in 3rd floor reading lounge of Hostel Block B during peak evening hours."</p>
+                  <small class="text-muted">Hostel Resident • 4 hrs ago</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campus User Provisioning & Identity Directory Card -->
+            <div class="dash-card mb-4" id="adminUserDirectoryCard">
+              <div class="dash-card-header">
+                <div style="display: flex; align-items: center; gap: 0.65rem;">
+                  <span class="tile-icon-box bg-purple" style="width: 36px; height: 36px; font-size: 1.1rem;">👤</span>
+                  <div>
+                    <h4 style="margin: 0; font-size: 1rem;">Campus User Accounts & Identity Directory</h4>
+                    <small class="text-muted">All User IDs & initial passwords are created by the Administrator. Users sign in using their provisioned ID & password and can change passwords independently.</small>
+                  </div>
+                </div>
+                <span class="status-pill status-approved" id="adminTotalUsersBadge">8 Active Accounts</span>
+              </div>
+
+              <div class="user-mgmt-dual-grid">
+                <!-- 1. Provision New Campus User Account Form -->
+                <div class="create-user-card">
+                  <h4 style="font-size: 0.95rem; margin-bottom: 0.75rem; color: var(--brand-indigo);">➕ Create New Campus User Account:</h4>
+                  <form id="adminCreateUserForm" style="display: flex; flex-direction: column; gap: 0.65rem;">
+                    <div class="form-group mb-0">
+                      <label for="newUserRole" style="font-size: 0.78rem;">Account Type / Role:</label>
+                      <select id="newUserRole" class="form-control form-control-sm" required>
+                        <option value="student">Student (Enrolled Candidate)</option>
+                        <option value="faculty">Faculty Member (Teaching Staff)</option>
+                        <option value="parent">Parent / Guardian</option>
+                        <option value="admin">Campus Administrator</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group mb-0">
+                      <label for="newUserName" style="font-size: 0.78rem;">Full Name:</label>
+                      <input type="text" id="newUserName" class="form-control form-control-sm" placeholder="e.g. Pooja Sharma or Dr. Vikas Rao" required>
+                    </div>
+
+                    <div class="form-group mb-0">
+                      <label for="newUserId" style="font-size: 0.78rem;">User Login ID / Roll No / Staff ID:</label>
+                      <input type="text" id="newUserId" class="form-control form-control-sm" placeholder="e.g. CS-2024-099 or FAC-088" required>
+                      <small class="text-muted" style="font-size: 0.72rem;">This ID is used by the user to sign in to the website.</small>
+                    </div>
+
+                    <div class="form-group mb-0">
+                      <label for="newUserDept" style="font-size: 0.78rem;">Department / Semester / Designation:</label>
+                      <input type="text" id="newUserDept" class="form-control form-control-sm" placeholder="e.g. 5th Sem CSE or Assistant Professor" value="5th Semester • CSE">
+                    </div>
+
+                    <div class="form-group mb-0">
+                      <label for="newUserPassword" style="font-size: 0.78rem;">Initial Temporary Password:</label>
+                      <input type="text" id="newUserPassword" class="form-control form-control-sm" placeholder="e.g. campus123" required value="campus123">
+                      <small class="text-muted" style="font-size: 0.72rem;">The user can change this password on their own after signing in.</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-primary mt-1">
+                      <span>👤 Create & Provision Account</span>
+                    </button>
+                  </form>
+                </div>
+
+                <!-- 2. Institutional User Directory Table -->
+                <div class="user-directory-card">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                    <h4 style="font-size: 0.95rem; margin: 0;">Institutional User Roster:</h4>
+                    <input type="text" id="adminUserSearchInput" class="form-control form-control-sm" placeholder="Search by name, ID or role..." style="max-width: 220px;">
+                  </div>
+
+                  <div style="max-height: 340px; overflow-y: auto;">
+                    <table class="user-dir-table" id="adminUserDirectoryTable">
+                      <thead>
+                        <tr>
+                          <th>Login ID</th>
+                          <th>Full Name</th>
+                          <th>Role</th>
+                          <th>Department / Info</th>
+                          <th>Password Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="adminUserDirectoryTableBody">
+                        <!-- Populated dynamically via app.js -->
+                      </tbody>
+                    </table>
+                  </div>
+                  <small class="text-muted d-block mt-2">Passwords are protected. Administrator can reset forgotten passwords or provision fresh credentials.</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Admin Quick Controls Strip -->
+            <div class="admin-controls-strip">
+              <button class="btn btn-outline btn-sm" id="btnAdminScrollUserDirectory">👤 User Account Directory</button>
+              <button class="btn btn-outline btn-sm" id="btnAdminOpenHistory">🕒 Central Audit & History Logs</button>
+              <button class="btn btn-outline btn-sm" id="btnAdminOpenComplaints">💬 Grievance & SLA Manager</button>
+              <button class="btn btn-outline btn-sm" id="btnAdminOpenFeedbackRadar">⭐ Student Feedback Intelligence</button>
+              <button class="btn btn-outline btn-sm" id="btnAdminExportReport">📥 Generate NAAC Compliance Report</button>
+              <button class="btn btn-outline btn-sm" id="btnAdminViewSmsLogs">📱 Parent SMS Dispatch Log</button>
+            </div>
+          </div>
+
+          <!-- 4. PARENT VIEW -->
+          <div class="dashboard-panel" id="parentPanel">
+            <div class="dashboard-greeting-banner parent-banner">
+              <div class="greeting-left">
+                <div class="user-mini-avatar">👪</div>
+                <div>
+                  <h3 class="user-greeting-title" id="parentGreetingTitle">Welcome, Parent / Guardian! 👋</h3>
+                  <p class="user-greeting-sub" id="parentGreetingSub">Parent of Satyajit Mohapatra • B.Tech CSE (Sem 5) • Roll: CS-2024-082</p>
+                </div>
+              </div>
+              <div class="greeting-right">
+                <span class="chip-status online">Guardian Link: Verified</span>
+                <span class="chip-lang">SMS Alerts: Active</span>
+              </div>
+            </div>
+
+            <!-- Parent Overview Grid -->
+            <div class="action-tiles-grid">
+              <div class="action-tile" id="parentTileAttendance">
+                <div class="tile-icon-box bg-green">📊</div>
+                <div class="tile-details">
+                  <h4>Ward Attendance</h4>
+                  <span class="tile-badge badge-success" id="parentTileAttBadge">88% (Good Standing)</span>
+                </div>
+              </div>
+
+              <div class="action-tile highlight-tile" id="parentTileGatePass">
+                <div class="tile-icon-box bg-teal">🎫</div>
+                <div class="tile-details">
+                  <h4>Gate Outing Pass</h4>
+                  <span class="tile-badge badge-teal" id="parentTilePassBadge">Pass Active</span>
+                </div>
+              </div>
+
+              <div class="action-tile" id="parentTileFee">
+                <div class="tile-icon-box bg-blue">💳</div>
+                <div class="tile-details">
+                  <h4>Semester Dues</h4>
+                  <span class="tile-badge badge-success">All Clear ($0 Due)</span>
+                </div>
+              </div>
+
+              <div class="action-tile" id="parentTileSms">
+                <div class="tile-icon-box bg-purple">📱</div>
+                <div class="tile-details">
+                  <h4>SMS Alert Feed</h4>
+                  <span class="tile-badge">View Dispatch Log</span>
+                </div>
+              </div>
+
+              <div class="action-tile" id="btnParentChangePassword" style="cursor: pointer;">
+                <div class="tile-icon-box bg-indigo">🔑</div>
+                <div class="tile-details">
+                  <h4>Account Security</h4>
+                  <span class="tile-badge">Change Password</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Parent Detailed Split Row -->
+            <div class="dashboard-split-row">
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h4>📊 Ward Academic Attendance (Live Faculty Sync)</h4>
+                  <span class="badge-pill">Daily Online Sync</span>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 0.35rem;">
+                    <span>Overall Attendance (Mandatory 75% required)</span>
+                    <strong class="green-text" id="parentWardOverallPct">88%</strong>
+                  </div>
+                  <div style="height: 10px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden;">
+                    <div id="parentWardOverallBar" style="width: 88%; height: 100%; background: var(--brand-emerald);"></div>
+                  </div>
+                </div>
+                <div id="parentWardSubjectList" style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+                  <!-- Dynamically populated -->
+                </div>
+                <small style="color: var(--text-muted); display: block; margin-top: 0.75rem;">Parents receive immediate SMS notification if overall attendance drops below 75%.</small>
+              </div>
+
+              <div class="dash-card">
+                <div class="dash-card-header">
+                  <h4>🚨 Real-Time Security & Gate Departure Alert</h4>
+                  <span class="status-pill status-approved" id="parentPassStatusPill">Active Pass</span>
+                </div>
+                <div class="pass-preview-box">
+                  <p style="font-size: 0.88rem; margin-bottom: 0.5rem;" id="parentPassDetailsText">
+                    <strong>Pass ID:</strong> #GP-8834<br>
+                    <strong>Purpose:</strong> Medical Outing (Apollo Clinic)<br>
+                    <strong>Permitted Hours:</strong> Today: 03:30 PM - 07:30 PM<br>
+                    <strong>Approved By:</strong> Prof. Sharma (HOD CSE)
+                  </p>
+                  <p style="font-size: 0.78rem; color: var(--text-muted);">
+                    An automated SMS confirmation was sent to your registered mobile upon faculty authorization.
+                  </p>
+                  <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap;">
+                    <button class="btn btn-xs btn-outline" id="btnParentViewSmsHistory">📱 View SMS Dispatch Log</button>
+                    <button class="btn btn-xs btn-outline" id="btnParentCallAdvisor">📞 Contact Class Advisor</button>
+                    <button class="btn btn-xs btn-outline" id="btnParentCallWarden">📞 Contact Hostel Warden</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- End of #portalDashboardShell -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPUS SERVICES & ACADEMIC FACILITIES -->
+  <section class="section-padding bg-surface" id="services">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Campus Services</span>
+        <h2 class="section-title">Comprehensive Campus Facilities & Academic Services</h2>
+        <p class="section-subtitle">Everything needed for everyday academic excellence and campus living, accessible anytime across web and mobile.</p>
+      </div>
+
+      <!-- Service Group 1: Academics & Learning -->
+      <div class="feature-category-box">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <span class="category-pill mvp-pill">Academics</span>
+            <h3>Academic & Classroom Services</h3>
+          </div>
+          <p>Seamless daily learning schedules, automated attendance tracking, and examination hall tickets.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="f-icon bg-blue">📢</div>
+            <h4>Official Notices & Circulars</h4>
+            <p>Publish instant department announcements, university academic circulars, exam schedules, and holiday notifications.</p>
+            <span class="f-detail">Announcements • Circulars • Notices</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="f-icon bg-green">📋</div>
+            <h4>Digital Attendance System</h4>
+            <p>One-click attendance recording for professors, automated percentage calculations, and proactive alerts before the 75% norm.</p>
+            <span class="f-detail">Daily Logs • Subject Stats • SMS Alerts</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="f-icon bg-orange">🕒</div>
+            <h4>Class Schedule & Timetable</h4>
+            <p>Interactive daily lecture timetable, room assignments, lab bookings, and real-time updates for faculty class swaps.</p>
+            <span class="f-detail">Timetables • Room Maps • Schedule Updates</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="f-icon bg-purple">📝</div>
+            <h4>Examinations & Hall Tickets</h4>
+            <p>Download mid-semester and final admit cards, view exam room seating arrangements, and access verified semester grade sheets.</p>
+            <span class="f-detail">Admit Cards • Seating Plans • Grade Cards</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Group 2: Student Welfare & Credentials -->
+      <div class="feature-category-box">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <span class="category-pill ai-pill">Student Welfare</span>
+            <h3>Student Welfare, Credentials & Security</h3>
+          </div>
+          <p>Paperless clearances, verified credentials, transparent grievance redressal, and safety protocols.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="f-icon bg-teal">🎫</div>
+            <h4>Digital Gate Pass System</h4>
+            <p>Request day outings or medical leaves directly from your mobile. HODs approve in one click, generating security QR passes.</p>
+            <span class="f-detail">Apply • Faculty Endorsement • Gate QR</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="f-icon bg-emerald">📜</div>
+            <h4>Instant Verifiable Certificates</h4>
+            <p>Download digitally signed Bonafide Certificates, Transfer Certificates (TC), and Conduct Certificates with tamper-proof QR seals.</p>
+            <span class="f-detail">Bonafide • TC • Character Certs</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="f-icon bg-red">💬</div>
+            <h4>Campus Grievance & SLA Desk</h4>
+            <p>Submit issues for hostels, IT Wi-Fi, classroom equipment, or library with tracked resolution timers and administrative accountability.</p>
+            <span class="f-detail">Track Tickets • SLA Timers • Redressal</span>
+          </div>
+
+          <div class="feature-card">
+            <div class="f-icon bg-indigo">🔔</div>
+            <h4>Real-Time Alerts & Notifications</h4>
+            <p>Direct mobile alerts for class adjustments, urgent university circulars, fee deadlines, and gate pass approvals.</p>
+            <span class="f-detail">App Alerts • Push Notifications • SMS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service Group 3: Campus Living & Facilities -->
+      <div class="feature-category-box">
+        <div class="category-header">
+          <div class="category-title-wrap">
+            <span class="category-pill expansion-pill">Campus Living</span>
+            <h3>Campus Facilities & Student Services</h3>
+          </div>
+          <p>Integrated facilities supporting student residential life, transport, research, and career growth.</p>
+        </div>
+
+        <div class="modules-chips-grid">
+          <div class="module-chip">
+            <span class="m-icon">📚</span>
+            <div>
+              <strong>Central Digital Library</strong>
+              <small>50,000+ e-books, journals & RFID checkout</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">🚌</span>
+            <div>
+              <strong>Campus Transport & GPS</strong>
+              <small>Live bus route tracking & digital bus passes</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">🛏️</span>
+            <div>
+              <strong>Hostel & Residential Housing</strong>
+              <small>Room allocation, daily mess menu & warden support</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">🔬</span>
+            <div>
+              <strong>Research Labs & Inventory</strong>
+              <small>Lab equipment reservations & thesis submissions</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">💼</span>
+            <div>
+              <strong>Career & Placement Cell</strong>
+              <small>Campus recruitment drives, internships & alumni</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">👥</span>
+            <div>
+              <strong>Student Clubs & Forums</strong>
+              <small>Technical societies, sports & cultural activities</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">🏥</span>
+            <div>
+              <strong>Campus Medical Center</strong>
+              <small>24/7 First aid, emergency ambulance & doctor desk</small>
+            </div>
+          </div>
+
+          <div class="module-chip">
+            <span class="m-icon">💳</span>
+            <div>
+              <strong>Student Fee & Accounts</strong>
+              <small>Online tuition fee payment, receipts & scholarships</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 24/7 AI CAMPUS HELPDESK -->
+  <section class="section-padding" id="assistant-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag ai-pulse">24/7 Campus Assistance</span>
+        <h2 class="section-title">AI Campus Helpdesk: "Ask Anything About Your Campus"</h2>
+        <p class="section-subtitle">Trained on college regulations, schedules, and policies. Ask questions in English, Odia, Hindi, or select quick questions below.</p>
+      </div>
+
+      <div class="assistant-interactive-card">
+        <div class="chat-header">
+          <div class="bot-info">
+            <div class="bot-avatar">🤖</div>
+            <div>
+              <div class="bot-name-row">
+                <h4>Smart Campus AI Helpdesk</h4>
+                <span class="badge-pill-live">Online</span>
+              </div>
+              <small>Context: Satyajit (Student) • College of Eng. & Tech</small>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <span class="lang-indicator">Available in: English, ଓଡ଼ିଆ, हिन्दी, தமிழ், తెలుగు</span>
+            <button class="btn btn-xs btn-outline" id="clearChatBtn">Reset Chat</button>
+          </div>
+        </div>
+
+        <!-- Predefined Quick Questions -->
+        <div class="quick-prompts-tray">
+          <span class="tray-label">Quick Prompts:</span>
+          <button class="prompt-chip" data-prompt="When is the next event?">"When is the next event?"</button>
+          <button class="prompt-chip" data-prompt="Show my attendance">"Show my attendance"</button>
+          <button class="prompt-chip" data-prompt="How to request gate pass?">"How to request gate pass?"</button>
+          <button class="prompt-chip" data-prompt="Where can I get my certificate?">"Where can I get my certificate?"</button>
+          <button class="prompt-chip" data-prompt="How to apply for time table update?">"How to check class timetable?"</button>
+          <button class="prompt-chip lang-chip" data-prompt="ମୋର ଉପସ୍ଥିତି କେତେ ଅଛି?">"ମୋର ଉପସ୍ଥିତି କେତେ? (Odia)"</button>
+          <button class="prompt-chip lang-chip" data-prompt="गेट पास कैसे अप्लाई करें?">"गेट पास कैसे अप्लाई करें? (Hindi)"</button>
+        </div>
+
+        <!-- Chat Conversation Messages Window -->
+        <div class="chat-messages-window" id="chatMessagesWindow">
+          <div class="chat-message bot">
+            <div class="msg-avatar">🤖</div>
+            <div class="msg-bubble">
+              <p>Hello Satyajit! I'm your <strong>Smart Campus Assistant</strong>. How can I help you today?</p>
+              <p class="msg-subtext">You can ask about attendance, gate passes, upcoming events, exam dates, or timetable in your regional language!</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <form class="chat-input-bar" id="chatInputForm">
+          <input type="text" id="chatInputField" placeholder="Ask anything: e.g., 'What is today's schedule?' or 'Where is the AI Lab?'" autocomplete="off" required>
+          <button type="submit" class="btn btn-primary send-chat-btn" id="sendChatBtn">
+            <span>Send</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPUS NOTICES & CIRCULARS FEED -->
+  <section class="section-padding bg-surface" id="notices-preview">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">Official Feed</span>
+        <h2 class="section-title">Latest Campus Announcements & Circulars</h2>
+        <p class="section-subtitle">Official communications directly from the University Registrar, Examination Controller, and Department Heads.</p>
+      </div>
+
+      <div class="notices-stream-list" style="max-width: 900px; margin: 0 auto;">
+        <div class="notice-stream-item unread">
+          <div class="notice-stream-top">
+            <span class="badge-urgent">Examination Cell</span>
+            <span class="notice-date">Today, 11:30 AM</span>
+          </div>
+          <h4>Mid-Semester Examination Schedule Published</h4>
+          <p>The 5th Semester Mid-Term evaluations commence from October 12, 2026. Hall tickets and seating plans will be downloadable via the Student Portal starting next Monday.</p>
+          <div class="notice-meta">Issued by: Controller of Examinations</div>
+        </div>
+
+        <div class="notice-stream-item">
+          <div class="notice-stream-top">
+            <span class="badge-tag">Academic Guest Lecture</span>
+            <span class="notice-date">Yesterday, 04:15 PM</span>
+          </div>
+          <h4>Guest Lecture on Autonomous Systems in Industry</h4>
+          <p>Join us on Friday at 3:00 PM in the Main Seminar Hall for an exclusive technical presentation on autonomous systems and intelligent architectures.</p>
+          <div class="notice-meta">Issued by: Department of Computer Science</div>
+        </div>
+
+        <div class="notice-stream-item">
+          <div class="notice-stream-top">
+            <span class="badge-tag">Hostel Infrastructure</span>
+            <span class="notice-date">Sep 24, 2026</span>
+          </div>
+          <h4>High-Speed Fiber Wi-Fi Upgrade in Block B Hostels</h4>
+          <p>Routine network maintenance has concluded successfully. New access points with high-speed Wi-Fi connectivity are now active across dormitories.</p>
+          <div class="notice-meta">Issued by: Campus IT & Infrastructure Team</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPUS EMERGENCY & SUPPORT HELPLINE -->
+  <section class="final-cta-section" id="emergency-contact">
+    <div class="container text-center">
+      <div class="cta-inner-card">
+        <span class="badge-pill">🛡️ Campus Safety & Student Welfare</span>
+        <h2 class="cta-heading">24/7 Campus Support & Helpdesk</h2>
+        <p class="cta-sub">Our administration, security control room, and student welfare desks are available round-the-clock for assistance.</p>
+        
+        <div class="campus-contacts-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; text-align: left;">
+          <div style="background: rgba(0,0,0,0.25); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <strong>🚨 Main Security Desk</strong>
+            <p style="font-size: 0.85rem; margin-top: 0.25rem;">Gate #1 Control Room<br>Tel: +91 674 230-0100</p>
+          </div>
+          <div style="background: rgba(0,0,0,0.25); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <strong>🏥 Medical Center</strong>
+            <p style="font-size: 0.85rem; margin-top: 0.25rem;">Health Bay (24/7)<br>Tel: +91 674 230-0108</p>
+          </div>
+          <div style="background: rgba(0,0,0,0.25); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <strong>🛡️ Anti-Ragging Cell</strong>
+            <p style="font-size: 0.85rem; margin-top: 0.25rem;">Toll-Free Helpline<br>Tel: 1800-180-5522</p>
+          </div>
+          <div style="background: rgba(0,0,0,0.25); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-subtle);">
+            <strong>💻 IT & Portal Helpdesk</strong>
+            <p style="font-size: 0.85rem; margin-top: 0.25rem;">Support Desk<br>support@smartcampus.edu</p>
+          </div>
+        </div>
+
+        <div class="cta-buttons">
+          <a href="#portals" class="btn btn-primary btn-lg">Open Campus Portals</a>
+          <button class="btn btn-secondary btn-lg" id="btnOpenGrievanceFast">Submit Grievance Ticket</button>
+        </div>
+        <p class="cta-footer-note">Smarter Technology • Better Communication • Stronger Campus Community</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="footer-logo">
+          <span class="f-cap">🎓</span>
+          <strong>Smart Campus</strong>
+        </div>
+        <p>Unified Institutional Portal for Students, Faculty, Administrators, and Parents.</p>
+        <small>© 2026 Smart Campus Institute of Technology. All rights reserved.</small>
+      </div>
+      <div class="footer-col">
+        <h5>Campus Portals</h5>
+        <a href="#portals" class="quick-role-link" data-tab="student">Student Portal</a>
+        <a href="#portals" class="quick-role-link" data-tab="faculty">Faculty Portal</a>
+        <a href="#portals" class="quick-role-link" data-tab="admin">Administrator Hub</a>
+        <a href="#portals" class="quick-role-link" data-tab="parent">Parent Portal</a>
+      </div>
+      <div class="footer-col">
+        <h5>Key Services</h5>
+        <a href="#services">Digital Gate Pass</a>
+        <a href="#services">Verifiable Certificates</a>
+        <a href="#services">Class Timetable</a>
+        <a href="#services">Digital Library</a>
+      </div>
+      <div class="footer-col">
+        <h5>Student Support</h5>
+        <a href="#notices-preview">Campus Circulars</a>
+        <a href="#emergency-contact">Campus Security</a>
+        <a href="#assistant-section">24/7 AI Helpdesk</a>
+        <a href="#emergency-contact">Anti-Ragging Helpline</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- Modal 1: Gate Pass Generator Modal (Interactive) -->
+  <div class="modal-overlay" id="gatePassModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🎫</span>
+          <div>
+            <h3>Apply for Digital Gate Pass</h3>
+            <small>Student: Satyajit Mohapatra (CS-2024-082)</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="gatePassModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="gatePassForm">
+          <div class="form-group">
+            <label for="passTypeSelect">Pass Category:</label>
+            <select id="passTypeSelect" class="form-control" required>
+              <option value="Day Outing">Day Outing / Personal Work</option>
+              <option value="Medical Emergency">Medical Emergency / Doctor Visit</option>
+              <option value="Home Leave">Weekend / Home Leave</option>
+              <option value="Academic Visit">Academic Project / Off-Campus Lab</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="outTimeInput">Out Time:</label>
+              <input type="time" id="outTimeInput" class="form-control" value="16:00" required>
+            </div>
+            <div class="form-group">
+              <label for="inTimeInput">Expected In Time:</label>
+              <input type="time" id="inTimeInput" class="form-control" value="19:30" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="passReasonInput">Purpose & Destination:</label>
+            <textarea id="passReasonInput" class="form-control" rows="3" placeholder="Specify medical center, destination or purpose..." required>Visiting Apollo Medical Clinic for routine checkup.</textarea>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline" data-close="gatePassModal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Generate Pass Request</button>
+          </div>
+        </form>
+
+        <!-- Simulated Active Pass Output -->
+        <div id="generatedPassResult" class="generated-pass-container" style="display: none;">
+          <div class="pass-ticket">
+            <div class="ticket-header">
+              <strong>SMART CAMPUS DIGITAL GATE PASS</strong>
+              <span class="status-pill status-approved" id="ticketStatus">Approved</span>
+            </div>
+            <div class="ticket-info-grid">
+              <div><small>Name:</small> <span>Satyajit Mohapatra</span></div>
+              <div><small>Roll:</small> <span>CS-2024-082</span></div>
+              <div><small>Valid Window:</small> <span id="ticketWindow">Today, 04:00 PM - 07:30 PM</span></div>
+              <div><small>Approver:</small> <span>Prof. Sharma (HOD CSE)</span></div>
+            </div>
+            <div class="ticket-qr-area">
+              <div class="qr-box-lg">
+                <div class="qr-pattern"></div>
+              </div>
+              <small>Scan this QR code at Security Gate #1 / #2</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Digital Certificate Generator Modal (Interactive Bonafide / TC) -->
+  <div class="modal-overlay" id="certificateModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">📜</span>
+          <div>
+            <h3>Digital Certificate Issuance & Verification</h3>
+            <small>Tamper-proof verifiable institutional certificates</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="certificateModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="cert-controls">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="certTypeSelect">Certificate Type:</label>
+              <select id="certTypeSelect" class="form-control">
+                <option value="Bonafide Certificate">Bonafide Student Certificate</option>
+                <option value="Transfer Certificate">Transfer Certificate (TC)</option>
+                <option value="Character Certificate">Character & Conduct Certificate</option>
+                <option value="Letter of Recommendation">Letter of Recommendation (LOR)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="certPurposeInput">Issued For:</label>
+              <input type="text" id="certPurposeInput" class="form-control" value="State Scholarship & Passport Application">
+            </div>
+          </div>
+        </div>
+
+        <!-- Rendered Verifiable Certificate Preview -->
+        <div class="certificate-paper" id="certificatePaper">
+          <div class="cert-border">
+            <div class="cert-inner-border">
+              <div class="cert-top-header">
+                <span class="cert-emblem">🏛️</span>
+                <h4>SMART CAMPUS INSTITUTE OF TECHNOLOGY</h4>
+                <p>Accredited 'A++' by NAAC • Approved by AICTE • Bhubaneswar, Odisha</p>
+                <div class="cert-title-strip" id="certRenderedTitle">BONAFIDE CERTIFICATE</div>
+                <small class="cert-no">Ref No: SCIT/2026/BONA-8941</small>
+              </div>
+
+              <div class="cert-body-text">
+                <p>This is to certify that <strong>Satyajit Mohapatra</strong>, Son of Mr. N. Mohapatra, bearing Enrollment Number <strong>CS-2024-082</strong>, is a bonafide student of this institution pursuing the <strong>Bachelor of Technology in Computer Science & Engineering</strong> (Semester 5) during the academic year 2026-2027.</p>
+                <p id="certRenderedPurposeText">This certificate is issued upon student's request for the specific purpose of <strong>State Scholarship & Passport Application</strong>.</p>
+                <p>During his tenure, his conduct and academic discipline have been exemplary.</p>
+              </div>
+
+              <div class="cert-signatures-row">
+                <div class="sig-col">
+                  <div class="seal-box">
+                    <span class="seal-icon">🛡️</span>
+                    <small>Official Institutional Seal</small>
+                  </div>
+                </div>
+                <div class="sig-col">
+                  <div class="qr-verify-box">
+                    <div class="qr-pattern-sm"></div>
+                    <small>Verify Online at:<br>verify.smartcampus.edu/8941</small>
+                  </div>
+                </div>
+                <div class="sig-col text-right">
+                  <div class="digital-sig-preview">Prof. A. K. Sharma</div>
+                  <strong>Registrar / Head of Institution</strong>
+                  <small>Digitally Signed: 27-Sep-2026</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions mt-4">
+          <button class="btn btn-outline" data-close="certificateModal">Close</button>
+          <button class="btn btn-primary" id="btnPrintCertBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save Verified PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Notices Modal -->
+  <div class="modal-overlay" id="noticesModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">📢</span>
+          <div>
+            <h3>Campus Circulars & Notices</h3>
+            <small>Official announcements from administration & faculty</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="noticesModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="notices-stream-list" id="noticesStreamList">
+          <div class="notice-stream-item unread">
+            <div class="notice-stream-top">
+              <span class="badge-urgent">Examination Cell</span>
+              <span class="notice-date">Today, 11:30 AM</span>
+            </div>
+            <h4>Mid-Semester Examination Schedule Published</h4>
+            <p>The 5th Semester Mid-Term evaluations commence from October 12, 2026. Hall tickets will be downloadable via the Student Portal starting next Monday.</p>
+            <div class="notice-meta">Published by: Controller of Examinations</div>
+          </div>
+
+          <div class="notice-stream-item">
+            <div class="notice-stream-top">
+              <span class="badge-tag">Academic</span>
+              <span class="notice-date">Yesterday, 04:15 PM</span>
+            </div>
+            <h4>Guest Lecture on Autonomous Systems in Industry</h4>
+            <p>Join us on Friday at 3:00 PM in the Seminar Hall for an exclusive technical presentation on autonomous architectures.</p>
+            <div class="notice-meta">Published by: Dept of Computer Science</div>
+          </div>
+
+          <div class="notice-stream-item">
+            <div class="notice-stream-top">
+              <span class="badge-tag">Hostel & Campus</span>
+              <span class="notice-date">Sep 24, 2026</span>
+            </div>
+            <h4>High-Speed Fiber Wi-Fi Upgrade in Block B Hostels</h4>
+            <p>Routine network maintenance has concluded successfully. New access points with high-speed connectivity are now active across dormitories.</p>
+            <div class="notice-meta">Published by: IT Infrastructure Team</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Complaints / Grievance Tracker Modal -->
+  <div class="modal-overlay" id="complaintsModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">💬</span>
+          <div>
+            <h3>Campus Grievance & Complaint Tracker</h3>
+            <small>Transparent resolution tracking with SLA monitoring</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="complaintsModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- New Complaint Form -->
+        <form id="newComplaintForm" class="mb-4">
+          <h4 class="mb-2">Submit New Grievance</h4>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="complaintCategory">Category:</label>
+              <select id="complaintCategory" class="form-control" required>
+                <option value="Hostel & Mess">Hostel & Mess</option>
+                <option value="IT & Wi-Fi Network">IT & Wi-Fi Network</option>
+                <option value="Classroom & Lab Infrastructure">Classroom & Lab Infrastructure</option>
+                <option value="Library Services">Library Services</option>
+                <option value="Academic & Timetable">Academic & Timetable</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="complaintUrgency">Urgency:</label>
+              <select id="complaintUrgency" class="form-control">
+                <option value="Normal">Normal (SLA: 24h)</option>
+                <option value="High">High (SLA: 12h)</option>
+                <option value="Emergency">Emergency (SLA: 4h)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="complaintSubject">Brief Subject:</label>
+            <input type="text" id="complaintSubject" class="form-control" placeholder="e.g., Projector lamp faulty in Room 302" required>
+          </div>
+          <div class="form-group">
+            <label for="complaintDetails">Detailed Description:</label>
+            <textarea id="complaintDetails" class="form-control" rows="2" placeholder="Please provide specific location and details..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-sm">Submit Ticket</button>
+        </form>
+
+        <h4 class="mb-2">Your Active Grievance Tickets</h4>
+        <div class="tickets-list" id="ticketsList">
+          <div class="ticket-row" id="ticketDemo1">
+            <div class="ticket-info">
+              <strong>TKT-1042: Wi-Fi Access Point dropped in CS Lab 4</strong>
+              <small>Category: IT & Network • SLA: Resolution by 6:00 PM</small>
+            </div>
+            <span class="status-pill status-progress">In Progress</span>
+          </div>
+          <div class="ticket-row">
+            <div class="ticket-info">
+              <strong>TKT-0988: Request for extra copy of Algorithm Textbook</strong>
+              <small>Category: Library Services • Resolved</small>
+            </div>
+            <span class="status-pill status-approved">Resolved</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Mobile Preview Modal (Android / Smartphone) -->
+  <div class="modal-overlay" id="mobilePreviewModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">📱</span>
+          <div>
+            <h3>Preview Smart Campus on Android</h3>
+            <small>Instant real-time mobile testing on your smartphone</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="mobilePreviewModal">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="mb-4">Scan the QR code below with your Android camera or Google Lens to preview the responsive mobile interface instantly:</p>
+        
+        <div class="qr-container-card mb-4" style="background: #ffffff; padding: 1.25rem; border-radius: 12px; display: inline-block; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+          <img id="mobileQrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=http://10.10.2.92:3042/" alt="Smart Campus Android Preview QR Code" style="width: 200px; height: 200px; display: block; margin: 0 auto;">
+          <small style="color: #475569; display: block; margin-top: 0.5rem; font-weight: 600;">Scan with Android Phone</small>
+        </div>
+
+        <div class="network-details-box" style="background: var(--bg-surface); border: 1px solid var(--border-medium); border-radius: 12px; padding: 1rem; text-align: left; margin-bottom: 1.25rem;">
+          <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem;">🔗 Direct Mobile URLs:</h4>
+          <div style="margin-bottom: 0.5rem;">
+            <strong style="color: var(--brand-emerald); font-size: 0.85rem;">Option 1: Fast HTTP (Instant - No Warnings)</strong>
+            <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.25rem;">
+              <input type="text" id="mobileHttpUrlInput" readonly value="http://10.10.2.92:3042/" class="form-control" style="font-family: var(--font-mono); font-size: 0.82rem;">
+              <button class="btn btn-xs btn-outline copy-url-btn" data-copy="http://10.10.2.92:3042/">Copy</button>
+            </div>
+          </div>
+          <div>
+            <strong style="color: var(--brand-cyan); font-size: 0.85rem;">Option 2: Secure HTTPS (Encrypted TLS)</strong>
+            <div style="display: flex; gap: 0.5rem; align-items: center; margin-top: 0.25rem;">
+              <input type="text" id="mobileHttpsUrlInput" readonly value="https://10.10.2.92:3443/" class="form-control" style="font-family: var(--font-mono); font-size: 0.82rem;">
+              <button class="btn btn-xs btn-outline copy-url-btn" data-copy="https://10.10.2.92:3443/">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="steps-guide" style="text-align: left; font-size: 0.85rem; color: var(--text-muted); background: rgba(0,0,0,0.2); padding: 0.85rem; border-radius: 8px;">
+          <strong>📋 3 Quick Steps for Android:</strong>
+          <ol style="margin-left: 1.25rem; margin-top: 0.35rem; line-height: 1.5;">
+            <li>Ensure your Android device is on the <strong>same Wi-Fi network</strong> as this PC (or connect your PC to your phone's Wi-Fi hotspot).</li>
+            <li>Open the <strong>Chrome app</strong> or <strong>Camera</strong> on Android.</li>
+            <li>Scan the QR code or type <code>http://10.10.2.92:3042/</code> into the address bar.</li>
+          </ol>
+        </div>
+
+        <div class="modal-actions mt-4">
+          <button class="btn btn-primary btn-block" data-close="mobilePreviewModal">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: User Authentication & Role Login Modal -->
+  <div class="modal-overlay" id="loginModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🔐</span>
+          <div>
+            <h3>Campus Identity & Role Sign-In</h3>
+            <small>Select an existing campus profile or sign in with your ID</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="loginModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Login Method Tabs -->
+        <div class="login-tabs-nav mb-4">
+          <button class="login-tab-btn active" id="tabQuickLoginBtn">⚡ Instant Role Profiles</button>
+          <button class="login-tab-btn" id="tabFormLoginBtn">🔑 ID & Password Login</button>
+        </div>
+
+        <!-- 1. Quick One-Click Profile Selection -->
+        <div id="quickLoginView" class="login-tab-panel active">
+          <p class="mb-4 text-muted" style="font-size: 0.88rem;">
+            Click any profile below to instantly log in as that person. Each account maintains its own independent data, attendance, gate passes, and history logs:
+          </p>
+
+          <!-- Students Group -->
+          <div class="profile-group-box mb-4">
+            <span class="profile-group-label">👨‍🎓 Student Accounts (Individual records & gate passes)</span>
+            <div class="quick-profiles-grid" id="quickModalStudentsGrid">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Faculty Group -->
+          <div class="profile-group-box mb-4">
+            <span class="profile-group-label">👩‍🏫 Faculty Members (Approvals & Attendance marking)</span>
+            <div class="quick-profiles-grid" id="quickModalFacultyGrid">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Admin & Parents Split -->
+          <div class="profile-dual-split">
+            <div class="profile-group-box">
+              <span class="profile-group-label">👨‍💼 Administrator</span>
+              <div id="quickModalAdminBox">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <div class="profile-group-box">
+              <span class="profile-group-label">👪 Parents / Guardians</span>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem;" id="quickModalParentsBox">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Manual Form Login -->
+        <div id="formLoginView" class="login-tab-panel" style="display: none;">
+          <form id="manualLoginForm">
+            <div class="form-group">
+              <label for="loginRoleSelect">Account Type:</label>
+              <select id="loginRoleSelect" class="form-control" required>
+                <option value="student">Student Portal</option>
+                <option value="faculty">Faculty Member</option>
+                <option value="admin">Campus Administrator</option>
+                <option value="parent">Parent / Guardian</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="loginUsername">Username / Enrollment No / Staff ID:</label>
+              <input type="text" id="loginUsername" class="form-control" placeholder="e.g. CS-2024-082 or satyajit" required value="CS-2024-082">
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password:</label>
+              <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required value="campus123">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Sign In with Credentials</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 7: Campus Activity History & Audit Log Modal -->
+  <div class="modal-overlay" id="activityHistoryModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🕒</span>
+          <div>
+            <h3>Campus Activity History & Audit Trail</h3>
+            <small>Chronological record with Day, Date, Time, Role, and Action tracking</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="activityHistoryModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Filter Bar -->
+        <div class="history-controls-bar mb-4">
+          <div class="filter-group">
+            <span class="filter-label">Filter Role:</span>
+            <div class="filter-pills" id="historyRoleFilters">
+              <button class="hist-pill active" data-filter-role="all">All Roles</button>
+              <button class="hist-pill" data-filter-role="Student">Students</button>
+              <button class="hist-pill" data-filter-role="Faculty">Faculty</button>
+              <button class="hist-pill" data-filter-role="Administrator">Admin</button>
+              <button class="hist-pill" data-filter-role="Parent">Parents</button>
+            </div>
+          </div>
+
+          <div class="filter-group mt-2">
+            <span class="filter-label">Filter Action:</span>
+            <div class="filter-pills" id="historyActionFilters">
+              <button class="hist-pill active" data-filter-action="all">All Actions</button>
+              <button class="hist-pill" data-filter-action="GATE_PASS">Gate Passes</button>
+              <button class="hist-pill" data-filter-action="ATTENDANCE">Attendance</button>
+              <button class="hist-pill" data-filter-action="CERTIFICATE">Certificates</button>
+              <button class="hist-pill" data-filter-action="GRIEVANCE">Helpdesk</button>
+              <button class="hist-pill" data-filter-action="LOGIN">Sign Ins</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Items Timeline Container -->
+        <div class="history-timeline-scrollable" id="historyTimelineList">
+          <!-- Dynamic history items injected via JavaScript -->
+        </div>
+
+        <div class="modal-actions mt-4" style="justify-content: space-between; align-items: center;">
+          <button class="btn btn-xs btn-outline" id="btnExportHistoryLogs">📥 Export Audit Log (JSON)</button>
+          <button class="btn btn-primary" data-close="activityHistoryModal">Done</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 8: Detailed Attendance History & Certificate Modal -->
+  <div class="modal-overlay" id="attendanceModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">📋</span>
+          <div>
+            <h3>Academic Attendance Master & Session History</h3>
+            <small>Course-wise breakdown, roll-call audit log & certified attendance sheet</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="attendanceModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Attendance Stats Overview Bar -->
+        <div class="modal-att-summary-strip mb-3">
+          <div class="att-metric">
+            <span class="m-lbl">Overall Attendance</span>
+            <strong class="m-val green-text" id="modalAttOverallPct">88%</strong>
+          </div>
+          <div class="att-metric">
+            <span class="m-lbl">Total Conducted</span>
+            <strong class="m-val" id="modalAttTotalHeld">154 Classes</strong>
+          </div>
+          <div class="att-metric">
+            <span class="m-lbl">Attended</span>
+            <strong class="m-val green-text" id="modalAttAttended">136 Classes</strong>
+          </div>
+          <div class="att-metric">
+            <span class="m-lbl">Exam Eligibility</span>
+            <strong class="m-val status-pill status-approved" id="modalAttEligiblePill">Eligible (Above 75%)</strong>
+          </div>
+        </div>
+
+        <!-- Subject Wise Quick Cards -->
+        <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem;">Subject Performance & Criteria Margin:</h4>
+        <div class="subject-mini-grid mb-3" id="modalSubjectCardsGrid">
+          <!-- Injected dynamically via app.js -->
+        </div>
+
+        <!-- Daily Roll Call Session Audit Log -->
+        <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem;">Recent Roll-Call Sessions Log:</h4>
+        <div class="table-container" style="max-height: 240px; overflow-y: auto;">
+          <table class="data-table" style="font-size: 0.82rem;">
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Subject</th>
+                <th>Lecture Topic</th>
+                <th>Faculty</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="modalAttSessionsTableBody">
+              <!-- Populated dynamically via app.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Attendance Certificate Preview Section -->
+        <div class="mt-3 p-3" style="background: rgba(255,255,255,0.02); border: 1px dashed var(--border-subtle); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <strong>Official Attendance Certificate (Form AC-75)</strong><br>
+            <small class="text-muted">Digitally signed & barcoded for mid-term hall ticket verification.</small>
+          </div>
+          <button type="button" class="btn btn-sm btn-primary" id="btnPrintAttendanceCert">
+            🖨️ Print Verified Attendance Sheet
+          </button>
+        </div>
+
+        <div class="modal-actions mt-3">
+          <button class="btn btn-outline" data-close="attendanceModal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 9: Timetable & Schedule Updates Modal -->
+  <div class="modal-overlay" id="timetableModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🕒</span>
+          <div>
+            <h3>Academic Timetable & Lecture Schedule</h3>
+            <small>Weekly schedules, classroom allocations & real-time room swap announcements</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="timetableModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Day Switcher Tabs -->
+        <div class="timetable-days-nav mb-3" id="timetableDayTabs">
+          <button class="tt-day-btn active" data-day="Monday">Monday</button>
+          <button class="tt-day-btn" data-day="Tuesday">Tuesday</button>
+          <button class="tt-day-btn" data-day="Wednesday">Wednesday</button>
+          <button class="tt-day-btn" data-day="Thursday">Thursday</button>
+          <button class="tt-day-btn" data-day="Friday">Friday</button>
+          <button class="tt-day-btn" data-day="Saturday">Saturday</button>
+        </div>
+
+        <!-- Schedule Periods Table -->
+        <div class="table-container mb-3">
+          <table class="data-table" style="font-size: 0.85rem;">
+            <thead>
+              <tr>
+                <th>Period & Time</th>
+                <th>Course / Subject</th>
+                <th>Faculty</th>
+                <th>Room / Venue</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="timetablePeriodsBody">
+              <!-- Dynamically populated according to active day -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Faculty Room Swap & Extra Class Broadcast (Shown when logged in as faculty or admin) -->
+        <div id="facultyTimetableBroadcastCard" class="p-3" style="background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: var(--radius-sm); margin-top: 1rem;">
+          <h4 style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--brand-indigo);">📢 Broadcast Classroom Swap or Extra Lecture:</h4>
+          <form id="timetableSwapForm" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div class="form-row-3">
+              <div class="form-group mb-0">
+                <label style="font-size: 0.78rem;">Subject:</label>
+                <select id="ttSwapSubject" class="form-control form-control-sm">
+                  <option value="CS501">CS501: AI & Machine Learning</option>
+                  <option value="CS502">CS502: Cloud Computing</option>
+                  <option value="CS503">CS503: Data Structures</option>
+                </select>
+              </div>
+              <div class="form-group mb-0">
+                <label style="font-size: 0.78rem;">New Venue / Room:</label>
+                <input type="text" id="ttSwapVenue" class="form-control form-control-sm" placeholder="e.g. LH-302 (Auditorium Wing)" value="Seminar Hall B (Block 1)">
+              </div>
+              <div class="form-group mb-0">
+                <label style="font-size: 0.78rem;">Broadcast Type:</label>
+                <select id="ttSwapType" class="form-control form-control-sm">
+                  <option value="Venue Relocation">Venue Relocation</option>
+                  <option value="Extra Class">Extra Compensatory Class</option>
+                  <option value="Lab Reschedule">Lab Reschedule</option>
+                </select>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="submit" class="btn btn-xs btn-primary">Publish Timetable Update</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-actions mt-3">
+          <button class="btn btn-outline" data-close="timetableModal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 10: Mess Services & Dining Feedback Modal -->
+  <div class="modal-overlay" id="messModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🍽️</span>
+          <div>
+            <h3>Campus Dining & Hostel Mess Services</h3>
+            <small>Today's 4-meal cycle, nutritional facts, food quality rating & mess rebate</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="messModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- 4 Meals Grid -->
+        <div class="mess-meals-grid mb-3">
+          <div class="meal-slot-box">
+            <div class="slot-head">
+              <strong>🍳 Breakfast (07:30 - 09:30 AM)</strong>
+              <span class="status-pill status-approved">Concluded</span>
+            </div>
+            <p>Idli, Vada, Sambar, Coconut Chutney, Masala Omelette, Fresh Bananas, Tea / Coffee.</p>
+          </div>
+          <div class="meal-slot-box active-meal">
+            <div class="slot-head">
+              <strong>🍛 Lunch (12:30 - 02:30 PM)</strong>
+              <span class="status-pill status-urgent">Live Service</span>
+            </div>
+            <p>Steamed Basmati Rice, Dal Tadka, Paneer Butter Masala / Chicken Curry, Mixed Veg, Salad, Curd.</p>
+          </div>
+          <div class="meal-slot-box">
+            <div class="slot-head">
+              <strong>☕ Evening Snacks (05:00 - 06:15 PM)</strong>
+              <span class="status-pill status-progress">Upcoming</span>
+            </div>
+            <p>Samosa / Veg Cutlet, Mint Chutney, Butter Biscuits, Ginger Lemon Tea.</p>
+          </div>
+          <div class="meal-slot-box">
+            <div class="slot-head">
+              <strong>🍲 Dinner (07:30 - 09:30 PM)</strong>
+              <span class="status-pill status-progress">Upcoming</span>
+            </div>
+            <p>Tandoori Roti, Jeera Rice, Dal Fry, Seasonal Subzi, Kheer / Fruit Custard.</p>
+          </div>
+        </div>
+
+        <!-- Rating & Feedback Form -->
+        <div class="p-3 mb-3" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+          <h4 style="font-size: 0.95rem; margin-bottom: 0.5rem;">⭐ Rate Today's Meal & Hygiene:</h4>
+          <form id="messFeedbackForm" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div class="form-row-2">
+              <div class="form-group mb-0">
+                <label style="font-size: 0.78rem;">Meal Rated:</label>
+                <select id="messMealSelect" class="form-control form-control-sm">
+                  <option value="Lunch">Lunch (Paneer Butter Masala / Chicken)</option>
+                  <option value="Breakfast">Breakfast (Idli & Vada)</option>
+                  <option value="Dinner">Dinner</option>
+                </select>
+              </div>
+              <div class="form-group mb-0">
+                <label style="font-size: 0.78rem;">Rating (1 to 5 Stars):</label>
+                <select id="messStarSelect" class="form-control form-control-sm">
+                  <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                  <option value="4" selected>⭐⭐⭐⭐ Good (4/5)</option>
+                  <option value="3">⭐⭐⭐ Satisfactory (3/5)</option>
+                  <option value="2">⭐⭐ Needs Improvement (2/5)</option>
+                  <option value="1">⭐ Poor Quality (1/5)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group mb-0">
+              <label style="font-size: 0.78rem;">Comments / Suggestions for Mess Committee:</label>
+              <input type="text" id="messFeedbackComment" class="form-control form-control-sm" placeholder="e.g. Rice was well-cooked, curry spice level was perfect" value="Food quality and temperature were excellent today!">
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="submit" class="btn btn-xs btn-primary">Submit Dining Rating</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Mess Rebate Application -->
+        <div class="p-3" style="background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+            <h4 style="font-size: 0.95rem; margin: 0;">🏖️ Apply for Mess Leave Rebate</h4>
+            <span class="status-pill status-approved">Save on Dues</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Students absent from campus on approved gate pass / leave for &gt; 2 consecutive days receive a daily rebate of $5.50 (₹150) credited to their mess account.
+          </p>
+          <form id="messRebateForm" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <input type="date" id="messRebateStart" class="form-control form-control-sm" style="flex: 1;" required>
+            <input type="date" id="messRebateEnd" class="form-control form-control-sm" style="flex: 1;" required>
+            <button type="submit" class="btn btn-xs btn-outline">Apply for Mess Rebate</button>
+          </form>
+        </div>
+
+        <div class="modal-actions mt-3">
+          <button class="btn btn-outline" data-close="messModal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 11: Fee Desk & Official Digital Receipts Modal -->
+  <div class="modal-overlay" id="feeModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">💳</span>
+          <div>
+            <h3>Campus Fee Desk & Official Payment Receipts</h3>
+            <small>Itemized semester dues, transaction history & verified receipts</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="feeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Dues Summary Strip -->
+        <div class="modal-att-summary-strip mb-3">
+          <div class="att-metric">
+            <span class="m-lbl">Current Balance</span>
+            <strong class="m-val green-text">$0.00 (All Clear)</strong>
+          </div>
+          <div class="att-metric">
+            <span class="m-lbl">Semester 5 Fee</span>
+            <strong class="m-val">$2,450.00</strong>
+          </div>
+          <div class="att-metric">
+            <span class="m-lbl">Last Payment</span>
+            <strong class="m-val">Aug 14, 2026</strong>
+          </div>
+          <div class="att-metric">
+            <span class="m-lbl">Receipt Status</span>
+            <strong class="m-val status-pill status-approved">Verified Institutional</strong>
+          </div>
+        </div>
+
+        <!-- Official Fee Receipt Slip -->
+        <div class="fee-receipt-card p-4 mb-3" id="officialFeeReceiptCard" style="background: #ffffff; color: #0f172a; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.75rem; margin-bottom: 1rem;">
+            <div>
+              <h3 style="margin: 0; font-size: 1.15rem; color: #1e293b;">SMART CAMPUS UNIVERSITY</h3>
+              <p style="margin: 0; font-size: 0.78rem; color: #64748b;">Office of the Comptroller & Accounts • Official E-Receipt</p>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-weight: 700; color: #059669; font-size: 0.95rem;">PAID • VERIFIED</span>
+              <p style="margin: 0; font-family: var(--font-mono); font-size: 0.75rem; color: #64748b;">Receipt #: SCU-FEE-2026-9921</p>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.84rem; margin-bottom: 1rem;">
+            <div><strong>Student Name:</strong> Satyajit Mohapatra</div>
+            <div><strong>Roll / Enrollment:</strong> CS-2024-082</div>
+            <div><strong>Program & Sem:</strong> B.Tech CSE (Semester 5)</div>
+            <div><strong>Transaction Reference:</strong> UPI/TXN-88491024</div>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-bottom: 1rem;">
+            <thead>
+              <tr style="background: #f1f5f9; text-align: left; border-bottom: 1px solid #cbd5e1;">
+                <th style="padding: 6px 8px;">Description</th>
+                <th style="padding: 6px 8px; text-align: right;">Amount (USD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 6px 8px;">Tuition & Academic Instructional Fee (Sem 5)</td>
+                <td style="padding: 6px 8px; text-align: right;">$1,650.00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 6px 8px;">Laboratory & Computing Infrastructure Charges</td>
+                <td style="padding: 6px 8px; text-align: right;">$350.00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 6px 8px;">Library & Digital Research Access</td>
+                <td style="padding: 6px 8px; text-align: right;">$150.00</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 6px 8px;">Hostel Accommodation & Dining Advance</td>
+                <td style="padding: 6px 8px; text-align: right;">$300.00</td>
+              </tr>
+              <tr style="font-weight: 700; background: #f8fafc;">
+                <td style="padding: 8px;">Total Paid:</td>
+                <td style="padding: 8px; text-align: right; color: #059669;">$2,450.00</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="display: flex; justify-content: space-between; align-items: flex-end; font-size: 0.75rem; color: #64748b;">
+            <div>Digitally authorized by Finance Officer • No physical stamp required</div>
+            <div style="font-weight: 600;">Balance Due: $0.00 (Nil)</div>
+          </div>
+        </div>
+
+        <div class="modal-actions mt-3" style="justify-content: space-between; align-items: center;">
+          <button class="btn btn-outline" data-close="feeModal">Close</button>
+          <button class="btn btn-primary" id="btnPrintFeeReceipt">
+            🖨️ Print / Download PDF Receipt
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 12: Parent SMS Simulation & Dispatch Log Modal -->
+  <div class="modal-overlay" id="smsSimulationModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">📱</span>
+          <div>
+            <h3>Parent SMS Gateway & Offline Dispatch Log</h3>
+            <small>Inclusive SMS alerts for parents, low-end phones & low-bandwidth connectivity</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="smsSimulationModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
+          To ensure inclusivity for parents and students in rural or low-bandwidth areas without active internet access, the platform automatically relays high-priority alerts via standard SMS text messages.
+        </p>
+
+        <!-- Simulated Mobile Phone Screen Container -->
+        <div class="phone-sms-mockup p-3" style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-medium); border-radius: var(--radius-md); max-height: 380px; overflow-y: auto;">
+          <div style="text-align: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+            <strong style="font-size: 0.85rem; color: var(--brand-emerald);">Sender: SMART-CAMPUS-SMS (VK-SCAMPUS)</strong><br>
+            <small class="text-muted">Registered Recipient: +91 98******10 (Mr. N. Mohapatra)</small>
+          </div>
+
+          <div class="sms-stream" id="parentSmsStreamList" style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <!-- Dynamic SMS items injected via app.js -->
+          </div>
+        </div>
+
+        <div class="modal-actions mt-3" style="justify-content: space-between; align-items: center;">
+          <button class="btn btn-xs btn-outline" id="btnTriggerTestSms">📲 Send Test Parent Alert SMS</button>
+          <button class="btn btn-primary" data-close="smsSimulationModal">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 13: Student Campus & Faculty Feedback Hub Modal -->
+  <div class="modal-overlay" id="feedbackModal" aria-hidden="true">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">⭐</span>
+          <div>
+            <h3>Student Feedback & Institutional Appraisal Hub</h3>
+            <small>Submit ratings & constructive feedback on faculty teaching and campus facilities</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="feedbackModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        
+        <!-- Feedback Mode Navigation Tabs -->
+        <div class="login-tabs-nav mb-3">
+          <button class="login-tab-btn active" id="tabFacultyFeedbackNav">👩‍🏫 Faculty Teaching Evaluation</button>
+          <button class="login-tab-btn" id="tabCampusFeedbackNav">🏛️ Campus Facilities Feedback</button>
+          <button class="login-tab-btn" id="tabHistoryFeedbackNav">📜 My Submitted Feedback</button>
+        </div>
+
+        <!-- 1. Faculty Feedback Panel -->
+        <div id="panelFacultyFeedback" class="feedback-subpanel active">
+          <p class="text-muted mb-3" style="font-size: 0.84rem;">
+            Your feedback directly drives faculty development, curriculum pacing, and NAAC teaching quality metrics. Anonymous evaluations are strictly protected.
+          </p>
+
+          <form id="studentFacultyFeedbackForm">
+            <div class="form-row-2 mb-3">
+              <div class="form-group mb-0">
+                <label for="fbFacultyCourseSelect" style="font-size: 0.8rem;">Select Faculty & Course:</label>
+                <select id="fbFacultyCourseSelect" class="form-control form-control-sm" required>
+                  <option value="Prof. A.K. Sharma | CS501 AI & Machine Learning">Prof. A.K. Sharma — CS501: AI & Machine Learning</option>
+                  <option value="Dr. Priya Patel | CS502 Cloud Computing">Dr. Priya Patel — CS502: Cloud Computing & DevOps</option>
+                  <option value="Prof. A.K. Sharma | CS503 Data Structures">Prof. A.K. Sharma — CS503: Data Structures & Algorithms</option>
+                  <option value="Prof. S. Mohanty | CS504 DBMS">Prof. S. Mohanty — CS504: Database Management Systems</option>
+                </select>
+              </div>
+              <div class="form-group mb-0">
+                <label for="fbAcademicTerm" style="font-size: 0.8rem;">Evaluation Cycle:</label>
+                <input type="text" id="fbAcademicTerm" class="form-control form-control-sm" value="Autumn 2026 (Mid-Term)" readonly>
+              </div>
+            </div>
+
+            <!-- 4 Core Criteria Ratings -->
+            <div class="rating-criteria-box mb-3">
+              <h5 style="font-size: 0.88rem; margin-bottom: 0.65rem; color: var(--brand-emerald);">Teaching Criteria Ratings (1 to 5 Stars):</h5>
+
+              <div class="criteria-row">
+                <div class="c-title">
+                  <strong>1. Concept Clarity & Presentation:</strong>
+                  <small>Clarity of explanations, pace of lecture, and blackboard/slides effectiveness</small>
+                </div>
+                <select id="fbRatingClarity" class="form-control form-control-sm c-select">
+                  <option value="5" selected>⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                  <option value="4">⭐⭐⭐⭐ 4 - Very Good</option>
+                  <option value="3">⭐⭐⭐ 3 - Satisfactory</option>
+                  <option value="2">⭐⭐ 2 - Needs Improvement</option>
+                  <option value="1">⭐ 1 - Poor</option>
+                </select>
+              </div>
+
+              <div class="criteria-row">
+                <div class="c-title">
+                  <strong>2. Doubt Resolution & Accessibility:</strong>
+                  <small>Willingness to answer questions during class and availability during office hours</small>
+                </div>
+                <select id="fbRatingDoubts" class="form-control form-control-sm c-select">
+                  <option value="5" selected>⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                  <option value="4">⭐⭐⭐⭐ 4 - Very Good</option>
+                  <option value="3">⭐⭐⭐ 3 - Satisfactory</option>
+                  <option value="2">⭐⭐ 2 - Needs Improvement</option>
+                  <option value="1">⭐ 1 - Poor</option>
+                </select>
+              </div>
+
+              <div class="criteria-row">
+                <div class="c-title">
+                  <strong>3. Practical Coding & Lab Mentorship:</strong>
+                  <small>Hands-on coding guidance, relevant real-world problem sets, and experiment mentoring</small>
+                </div>
+                <select id="fbRatingLabs" class="form-control form-control-sm c-select">
+                  <option value="5" selected>⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                  <option value="4">⭐⭐⭐⭐ 4 - Very Good</option>
+                  <option value="3">⭐⭐⭐ 3 - Satisfactory</option>
+                  <option value="2">⭐⭐ 2 - Needs Improvement</option>
+                  <option value="1">⭐ 1 - Poor</option>
+                </select>
+              </div>
+
+              <div class="criteria-row">
+                <div class="c-title">
+                  <strong>4. Fairness & Transparency in Grading:</strong>
+                  <small>Impartial assignment assessment and constructive feedback on exams</small>
+                </div>
+                <select id="fbRatingFairness" class="form-control form-control-sm c-select">
+                  <option value="5" selected>⭐⭐⭐⭐⭐ 5 - Excellent</option>
+                  <option value="4">⭐⭐⭐⭐ 4 - Very Good</option>
+                  <option value="3">⭐⭐⭐ 3 - Satisfactory</option>
+                  <option value="2">⭐⭐ 2 - Needs Improvement</option>
+                  <option value="1">⭐ 1 - Poor</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Qualitative Comments -->
+            <div class="form-group mb-3">
+              <label for="fbFacultyComments" style="font-size: 0.8rem;">Constructive Comments & Suggestions for Faculty:</label>
+              <textarea id="fbFacultyComments" class="form-control" rows="3" placeholder="What does this professor do best? Any suggestions to enhance learning, pacing, or tutorials?" required></textarea>
+            </div>
+
+            <!-- Anonymous Checkbox -->
+            <div class="checkbox-option mb-3">
+              <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; cursor: pointer;">
+                <input type="checkbox" id="fbAnonymousCheck" checked>
+                <span><strong>Submit Anonymously</strong> (Recommended: Your name is masked as <em>"Anonymous Student"</em> to protect confidentiality)</span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="submit" class="btn btn-primary">Submit Faculty Appraisal</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 2. Campus Facilities Feedback Panel -->
+        <div id="panelCampusFeedback" class="feedback-subpanel" style="display: none;">
+          <p class="text-muted mb-3" style="font-size: 0.84rem;">
+            Help campus administrators optimize classroom environments, high-speed Wi-Fi, computer labs, library spaces, hostel hygiene, and dining services.
+          </p>
+
+          <form id="studentCampusFeedbackForm">
+            <div class="form-row-2 mb-3">
+              <div class="form-group mb-0">
+                <label for="fbCampusDomainSelect" style="font-size: 0.8rem;">Campus Infrastructure / Facility:</label>
+                <select id="fbCampusDomainSelect" class="form-control form-control-sm" required>
+                  <option value="Campus Wi-Fi & IT Network">Campus Wi-Fi & High-Speed IT Network</option>
+                  <option value="Computer Labs & Robotics Hardware">Computer Labs, GPU Clusters & Hardware</option>
+                  <option value="Classroom Projectors & Smartboards">Classrooms, Projectors & Smartboards</option>
+                  <option value="Central Library & Silent Study Zones">Central Library & Digital E-Journals</option>
+                  <option value="Campus Cleanliness & Water Stations">Campus Cleanliness, Washrooms & Water Stations</option>
+                  <option value="Hostel Living & Security">Hostel Living, Maintenance & Gate Security</option>
+                  <option value="Sports Complex & Gymnasium">Sports Complex & Indoor Gymnasium</option>
+                  <option value="Administrative Office Services">Administrative Office & Fee Counter Support</option>
+                </select>
+              </div>
+              <div class="form-group mb-0">
+                <label for="fbFacilityLocation" style="font-size: 0.8rem;">Specific Location / Building:</label>
+                <input type="text" id="fbFacilityLocation" class="form-control form-control-sm" placeholder="e.g. Block B 3rd Floor or CS Lab 4" required value="CS Lab 4 (Block 2)">
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="fbCampusRating" style="font-size: 0.8rem;">Overall Facility Satisfaction Rating:</label>
+              <select id="fbCampusRating" class="form-control form-control-sm">
+                <option value="5">⭐⭐⭐⭐⭐ 5 - Highly Satisfied (World-Class)</option>
+                <option value="4" selected>⭐⭐⭐⭐ 4 - Good (Meets Standards)</option>
+                <option value="3">⭐⭐⭐ 3 - Satisfactory (Minor Glitches)</option>
+                <option value="2">⭐⭐ 2 - Below Expectations (Needs Upgrade)</option>
+                <option value="1">⭐ 1 - Poor (Requires Immediate Action)</option>
+              </select>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="fbCampusRemarks" style="font-size: 0.8rem;">Observations, Positive Aspects & Actionable Suggestions:</label>
+              <textarea id="fbCampusRemarks" class="form-control" rows="3" placeholder="Describe the facility condition and specific enhancements you'd like to see..." required></textarea>
+            </div>
+
+            <div class="checkbox-option mb-3">
+              <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.84rem; cursor: pointer;">
+                <input type="checkbox" id="fbCampusUrgentFlag">
+                <span>⚠️ <strong>Flag for Immediate Campus Works Attention</strong> (Auto-notifies the Maintenance Supervisor)</span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+              <button type="submit" class="btn btn-primary">Submit Campus Feedback</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 3. My Submitted Feedback History Panel -->
+        <div id="panelHistoryFeedback" class="feedback-subpanel" style="display: none;">
+          <h4 style="font-size: 0.92rem; margin-bottom: 0.65rem;">My Submitted Evaluations & Appraisals:</h4>
+          <div class="feedback-history-list" id="feedbackHistoryList">
+            <!-- Dynamically populated via app.js -->
+          </div>
+        </div>
+
+        <div class="modal-actions mt-3">
+          <button class="btn btn-outline" data-close="feedbackModal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 14: Change Password Modal (Self-Service for all authenticated users) -->
+  <div class="modal-overlay" id="changePasswordModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🔑</span>
+          <div>
+            <h3>Change Account Password</h3>
+            <small>Update your institutional login credentials securely</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="changePasswordModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 mb-3" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            Active Account: <strong id="changePwdUserDisplay" style="color: var(--text-main);">Satyajit Mohapatra (CS-2024-082)</strong>
+          </div>
+          <small class="text-muted d-block mt-1">Initial accounts are created by the administrator. You can update your password below at any time.</small>
+        </div>
+
+        <form id="selfChangePasswordForm">
+          <div class="form-group mb-3">
+            <label for="currentPasswordInput" style="font-size: 0.8rem;">Current Password:</label>
+            <input type="password" id="currentPasswordInput" class="form-control" placeholder="Enter existing password" required>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="newPasswordInput" style="font-size: 0.8rem;">New Password:</label>
+            <input type="password" id="newPasswordInput" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
+            <div class="password-strength-bar">
+              <div class="password-strength-fill" id="pwdStrengthMeter"></div>
+            </div>
+            <div class="password-req-hint" id="pwdStrengthText">Password must be at least 6 characters.</div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label for="confirmPasswordInput" style="font-size: 0.8rem;">Confirm New Password:</label>
+            <input type="password" id="confirmPasswordInput" class="form-control" placeholder="Re-type new password" minlength="6" required>
+          </div>
+
+          <p class="text-muted" style="font-size: 0.78rem;">
+            🔒 Once saved, you must use this new password for all subsequent logins across web and mobile browsers.
+          </p>
+
+          <div class="modal-actions mt-3" style="justify-content: space-between; align-items: center;">
+            <button type="button" class="btn btn-outline" data-close="changePasswordModal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 15: Administrator Password Reset & Provisioning Modal -->
+  <div class="modal-overlay" id="adminResetPasswordModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="m-icon">🛡️</span>
+          <div>
+            <h3>Administrator Password Reset</h3>
+            <small>Override or provision new temporary credentials for campus user</small>
+          </div>
+        </div>
+        <button class="close-modal-btn" data-close="adminResetPasswordModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="p-3 mb-3" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);">
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            Target Account: <strong id="adminResetTargetDisplay" style="color: var(--text-main);">User Account</strong>
+          </div>
+          <small class="text-muted d-block mt-1">As campus administrator, you can reset this user's password. They will be able to log in with this temporary password and change it independently.</small>
+        </div>
+
+        <form id="adminResetPasswordForm">
+          <input type="hidden" id="adminResetTargetUserId">
+          <div class="form-group mb-3">
+            <label for="adminNewTempPassword" style="font-size: 0.8rem;">New Temporary Password:</label>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="text" id="adminNewTempPassword" class="form-control" placeholder="e.g. campus123" required value="campus123">
+              <button type="button" class="btn btn-outline btn-sm" id="btnAdminGenerateRandomPwd" title="Generate Secure Password">🎲 Generate</button>
+            </div>
+            <small class="text-muted" style="font-size: 0.72rem;">User can sign in with this temporary password and update it immediately.</small>
+          </div>
+
+          <div class="modal-actions mt-3" style="justify-content: space-between; align-items: center;">
+            <button type="button" class="btn btn-outline" data-close="adminResetPasswordModal">Cancel</button>
+            <button type="submit" class="btn btn-primary">Confirm & Reset Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Interactive JavaScript logic -->
+  <script src="app.js"></script>
+</body>
+</html>
